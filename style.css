@@ -1,0 +1,1073 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&display=swap');
+
+/* --- Estilos generales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper {
+    width: 100vw;
+    background-color: #191c32;
+    color: #fff;
+}
+
+/* --- Barra Navegacion --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.brand {
+    margin-top: -7px;
+}
+
+.brand span {
+    color: rgb(24, 97, 97);
+}
+
+.menu {
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.menu li {
+    list-style: none;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.menu li:hover a {
+    background-color: rgb(24, 97, 97);
+    color: #191c32;
+}
+
+.menu .active {
+    color: rgb(60, 131, 131);
+}
+
+.menu li a:hover {
+    color: rgb(213, 218, 218);
+}
+
+.drawer {
+    color: rgb(60, 131, 131);
+    float: left;
+    cursor: pointer;
+    display: none;
+    margin-left: 1rem;
+    border: solid 0.1rem var(--white-text);
+    padding: .2rem;
+    border-radius: .1rem;
+}
+
+#ckbox {
+    display: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white-text);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--Arete);
+    z-index: 1;
+    left: 0;
+}
+
+.dropdown-content li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content li a {
+    display: block;
+    padding: 0;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content li a:hover {
+    background-color: var(--Arete);
+    color: black;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown .fa-caret-down {
+    margin-left: 0.5rem;
+}
+
+
+
+/* --- Main  --- */
+.main {
+    margin: 0 auto;
+    width: 80vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2em;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.info-content span {
+    color: rgb(60, 131, 131);
+}
+
+.main img {
+    margin-left: 200px;
+    border: 4px solid rgb(60, 131, 131);
+    width: 280px;
+    height: 320px;
+    z-index: 1;
+}
+
+/*Footer*/
+
+.footer {
+    bottom: 0;
+    color: #191c32;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 200px;
+    padding: 2em;
+    background-color: rgb(24, 97, 97);
+}
+
+.footer-content h2 {
+    font-size: 3em;
+}
+
+.footer-content h5 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.sotial-networks {
+    display: flex;
+    justify-content: space-evenly;
+    width: 300px;
+    margin-top: 1em;
+}
+
+.sotial-networks i {
+    font-size: 1.5em;
+}
+
+
+/* --- Seccion about --- */
+.about {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    width: 100vw;
+    align-items: center;
+}
+
+.about img {
+    width: 100%;
+    grid-column: 1/5;
+}
+
+.about-info {
+    grid-column: 5/10;
+    padding: 3em;
+}
+
+.about-info h2 {
+    font-size: 2em;
+    color: #191c32;
+}
+
+.divider {
+    height: 4px;
+    width: 60px;
+    background-color: rgb(60, 131, 131);
+    margin-top: 5px;
+    margin-bottom: 2em;
+}
+
+.about p {
+    margin-bottom: 1em;
+}
+
+/* --- Portfolio & seccion contacto --- */
+.portfolio,
+.contact-section {
+    width: 100vw;
+    background-color: #191c32;
+    color: #fff;
+}
+
+.portfolio-heading,
+.contact-heading {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.portfolio-heading h2,
+.contact-heading h2 {
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.portfolio .container {
+    width: 80vw;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 300px;
+    background-color: #2b3058;
+    margin: 1em;
+}
+
+.card__img {
+    width: 100%;
+    height: 150px;
+    background-image: url(img/abstract-flames-1158772.jpg);
+    background-size: cover;
+}
+
+.card__title {
+    padding: 20px;
+}
+
+.card__proyect-links {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card__proyect-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.card__proyect-links i {
+    font-size: 1.5em;
+}
+
+.button-content {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.project-details-button a {
+    text-decoration: none;
+    color: #191c32;
+}
+
+.download-cv,
+.project-details-button.download-cv {
+    padding: 10px 20px;
+    background-color: rgb(60, 131, 131);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    -webkit-box-shadow: 1px 3px 11px -5px rgb(60, 131, 131, 0.69);
+    -moz-box-shadow: 1px 3px 11px -5px rgb(60, 131, 131, 0.69);
+    box-shadow: 1px 3px 11px -5px rgb(60, 131, 131, 0.69);
+    text-decoration: none;
+    color: #191c32;
+}
+
+.download-cv:hover,
+.project-details-button.download-cv:hover {
+    background-color: azure;
+    box-shadow: none;
+}
+
+/* Contact Section Estilos Especificos */
+.contact-section {
+    padding: 3em;
+}
+
+.contact-heading {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-heading h2 {
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.divider {
+    height: 4px;
+    width: 60px;
+    background-color: #00838f;
+    margin-top: 5px;
+    margin-bottom: 2em;
+}
+
+.container-contact {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.contact-section img {
+    width: 750px;
+    height: 700px;
+    bottom: 0px;
+}
+
+.contact-form {
+    margin-left: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin-top: 2em;
+}
+
+.form-group textarea {
+    height: 150px;
+    padding: 1.5em;
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.form-group .input {
+    padding: 10px 20px;
+    margin-bottom: 1em;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.form-group .btn-submit {
+    padding: 10px 20px;
+    margin: 1em;
+    border-radius: 20px;
+    border: none;
+    text-transform: uppercase;
+    background-color: #00838f;
+}
+
+/* --- Curriculum  --- */
+.cv-section {
+    padding: 40px 20px;
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #00838f;
+    background-color: #191c32;
+}
+
+.cv-section h2 {
+    font-size: 2.5em;
+    color: #00838f;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cv-download {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+}
+
+.cv-download a {
+    color: #00838f;
+    text-decoration: none;
+    border-bottom: 1px solid #00838f;
+    padding-bottom: 2px;
+    transition: color 0.3s ease-in-out, border-bottom-color 0.3s ease-in-out;
+}
+
+.cv-download a:hover {
+    color: #00838f;
+    border-bottom-color: #00838f;
+}
+
+.cv-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.cv-column {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cv-column h3 {
+    font-size: 1.8em;
+    color: #00838f;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cv-item {
+    margin-bottom: 25px;
+}
+
+.cv-item h4 {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.cv-item .cv-date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.cv-item ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.cv-item ul li {
+    margin-bottom: 5px;
+}
+
+.cv-skills-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cv-skills-list li {
+    background-color: #e0f7fa;
+    color: #00838f;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+
+/* --- Contact Form s --- */
+.form-section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    box-sizing: border-box;
+}
+
+form.contact-form {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-family: "Tagesschrift", system-ui;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+form.contact-form h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #191c32;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+form.contact-form p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+form.contact-form label {
+    font-size: 1.2em;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form.contact-form input[type="text"],
+form.contact-form input[type="email"],
+form.contact-form textarea,
+form.contact-form select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid #191c32;
+    font-size: 1em;
+    font-family: "Tagesschrift", system-ui;
+    resize: vertical;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form.contact-form input[type="text"]:focus,
+form.contact-form input[type="email"]:focus,
+form.contact-form textarea:focus,
+form.contact-form select:focus {
+    outline: none;
+    border-color: aquamarine;
+}
+
+form.contact-form textarea {
+    min-height: 120px;
+}
+
+form.contact-form button[type="submit"] {
+    background: #191c32;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    padding: 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.4s;
+}
+
+form.contact-form button[type="submit"]:hover {
+    background-color: aquamarine;
+    color: rgb(45, 3, 74);
+}
+
+
+/* Media query para pantallas de hasta 600px */
+@media (max-width: 600px) {
+    .portfolio .container {
+        width: 95vw;
+    }
+
+    .card {
+        width: 95%;
+    }
+
+    .contact-form {
+        width: 95%;
+    }
+
+    .form-group {
+        margin-top: 1em;
+    }
+}
+
+@media (max-width: 1020px) {
+    nav {
+        justify-content: flex;
+    }
+
+    .drawer {
+        display: block;
+    }
+
+    nav h1 {
+        margin-left: 1rem;
+    }
+
+    nav ul {
+        position: fixed;
+        width: 50%;
+        height: 60vh;
+        background-color: rgba(255, 255, 255, 0.1);
+        top: 10vh;
+        left: -100%;
+        text-align: left;
+        transition: all 0.5s;
+        flex-direction: column;
+    }
+
+    nav ul li {
+        padding: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        padding-left: 2rem;
+        border-bottom: solid 0.1rem rgba(201, 196, 196, 0.4);
+    }
+
+    nav ul li a {
+        background-color: var(--white-text);
+        width: 50%;
+        height: 100%;
+    }
+
+    #ckbox:checked~.menu {
+        left: 0;
+    }
+
+    footer {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .cv-content {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .cv-content>div:first-child,
+    .cv-content>div:nth-child(5) {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cv-content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cv-content>div:first-child,
+    .cv-content>div:nth-child(4) {
+        grid-column: 1 / 2;
+    }
+
+    .cv-content>div:nth-child(2) {
+        grid-column: 2 / 3;
+    }
+
+    .cv-content>div:nth-child(3),
+    .cv-content>div:nth-child(5) {
+        grid-column: 3 / 4;
+    }
+
+    .cv-content>div:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+
+
+/* Media query para pantallas de hasta 1300px de ancho*/
+@media (max-width: 1300px) {
+    .navbar {
+        padding: 1.5em;
+    }
+
+    .drawer {
+        display: block;
+        font-size: 1.5em;
+        margin-left: 1rem;
+    }
+
+
+    .menu {
+        position: fixed;
+        margin-top: 10rem;
+        top: 0;
+        left: -100%;
+        width: 150px;
+        height: 200px;
+        background-color: rgba(25, 28, 50, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .menu.open {
+        transform: translateX(0);
+    }
+
+    .menu li {
+        margin: 1em 0;
+    }
+
+    .menu a {
+        font-size: 1.2em;
+        padding: 1em 2em;
+    }
+
+    .main {
+        margin: 2em auto;
+        width: 90vw;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .main img {
+        margin-left: 0;
+        width: 200px;
+        height: auto;
+    }
+
+    .about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2em;
+        text-align: center;
+    }
+
+    .about img {
+        width: 80%;
+        order: 1;
+    }
+
+    .about-info {
+        grid-column: auto;
+        padding: 2em;
+        order: 2;
+    }
+
+    .about-info h2 {
+        font-size: 2em;
+    }
+
+    .divider {
+        height: 3px;
+        width: 40px;
+        margin: 1em auto;
+    }
+
+    .about p {
+        font-size: 0.95em;
+    }
+
+    .portfolio .container {
+        width: 90vw;
+        height: auto;
+        margin: 2em auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin: 1em 0;
+    }
+
+    .card__img {
+        height: 180px;
+    }
+
+    .card__title {
+        font-size: 1em;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .card__proyect-links {
+        padding: 1em 0;
+    }
+
+    .card__proyect-links i {
+        font-size: 1.3em;
+    }
+
+    .button-content {
+        margin: 1em 0;
+    }
+
+    .project-details-button a {
+        font-size: 0.9em;
+        padding: 0.8em 1.5em;
+    }
+
+    .download-cv,
+    .project-details-button.download-cv {
+        font-size: 0.9em;
+        padding: 0.8em 1.5em;
+    }
+
+    .container-contact {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2em;
+    }
+
+    .contact-section img {
+        width: 80%;
+        height: auto;
+        margin-bottom: 2em;
+    }
+
+    .contact-form {
+        margin-left: 0;
+        width: 90%;
+    }
+
+    .form-group {
+        width: 100%;
+        margin-top: 1.5em;
+    }
+
+    .form-group label {
+        font-size: 1em;
+    }
+
+    .form-group .input,
+    .form-group textarea,
+    form.contact-form select {
+        padding: 0.8em 1em;
+        font-size: 0.9em;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
+
+    .form-group .btn-submit {
+        font-size: 0.9em;
+        padding: 0.8em 1.5em;
+        margin: 1em auto;
+        display: block;
+    }
+
+    .cv-section {
+        padding: 2em 1em;
+    }
+
+    .cv-section h2 {
+        font-size: 2em;
+        margin-bottom: 1.5em;
+    }
+
+    .cv-download {
+        margin-bottom: 2em;
+        font-size: 0.9em;
+    }
+
+    .cv-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cv-column {
+        padding: 1.5em;
+    }
+
+    .cv-column h3 {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+        padding-bottom: 0.8em;
+    }
+
+    .cv-item {
+        margin-bottom: 20px;
+    }
+
+    .cv-item h4 {
+        font-size: 1.1em;
+        margin-bottom: 0.3em;
+    }
+
+    .cv-item .cv-date {
+        font-size: 0.8em;
+        margin-bottom: 0.8em;
+    }
+
+    .cv-item ul {
+        padding-left: 15px;
+        margin-bottom: 0.8em;
+    }
+
+    .cv-skills-list {
+        gap: 0.8em;
+    }
+
+    .cv-skills-list li {
+        padding: 0.6em 1em;
+        font-size: 0.8em;
+    }
+
+    .footer {
+        padding: 1.5em;
+        height: auto;
+        text-align: center;
+    }
+
+    .footer-content h2 {
+        font-size: 2em;
+    }
+
+    .footer-content h5 {
+        font-size: 1em;
+    }
+
+    .sotial-networks {
+        width: 80%;
+        margin-top: 1em;
+    }
+
+    .sotial-networks i {
+        font-size: 1.3em;
+    }
+}
+
+/* Media query para pantallas de hasta 600px de ancho*/
+@media (max-width: 600px) {
+    .main {
+        width: 95vw;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .main img {
+        width: 180px;
+    }
+
+    .about img {
+        width: 95%;
+    }
+
+    .about-info h2 {
+        font-size: 1.8em;
+    }
+
+    .portfolio .container {
+        width: 95vw;
+    }
+
+    .card {
+        width: 95%;
+    }
+
+    .card__img {
+        height: 150px;
+    }
+
+    .card__title {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .card__proyect-links i {
+        font-size: 1.2em;
+    }
+
+    .project-details-button a,
+    .download-cv {
+        font-size: 0.8em;
+        padding: 0.6em 1.2em;
+    }
+
+    .contact-section img {
+        width: 95%;
+    }
+
+    .contact-form {
+        width: 95%;
+    }
+
+    .form-group {
+        margin-top: 1em;
+    }
+
+    .form-group label {
+        font-size: 0.9em;
+    }
+
+    .form-group .input,
+    .form-group textarea,
+    form.contact-form select {
+        padding: 0.6em 0.8em;
+        font-size: 0.8em;
+    }
+
+    .form-group textarea {
+        min-height: 80px;
+    }
+
+    .form-group .btn-submit {
+        font-size: 0.8em;
+        padding: 0.6em 1.2em;
+    }
+
+    .cv-section h2 {
+        font-size: 1.8em;
+    }
+
+    .cv-column h3 {
+        font-size: 1.3em;
+    }
+
+    .cv-item h4 {
+        font-size: 1em;
+    }
+
+    .cv-skills-list li {
+        font-size: 0.7em;
+        padding: 0.5em 0.8em;
+    }
+
+    .footer-content h2 {
+        font-size: 1.8em;
+    }
+
+    .footer-content h5 {
+        font-size: 0.9em;
+    }
+
+    .sotial-networks i {
+        font-size: 1.2em;
+    }
+}
