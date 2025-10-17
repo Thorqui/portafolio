@@ -21,12 +21,9 @@
         html, body {
             height: 100%;
             margin: 0;
+            overflow: hidden;
             font-family: 'Space Mono', monospace;
             color: var(--light-grey);
-        }
-
-        .no-scroll {
-            overflow: hidden;
         }
 
         #bg-canvas {
@@ -382,15 +379,17 @@
             }
 
             #info-dropdown { top: 20%; left: 5%; }
+            #info-dropdown .content-display { display: none !important; }
             #proyectos-dropdown { top: 50%; left: 50%; transform: translate(-50%, -50%); }
             #contacto-dropdown { top: 20%; right: 5%; }
+            #contacto-dropdown .content-display { display: none !important; }
 
             .star-trigger {
-                font-size: clamp(2rem, 8vw, 2.5rem);
+                font-size: clamp(2rem, 8vw, 2.5rem) !important;
             }
 
             .content-display {
-                display: none;
+                display: none !important;
             }
 
             .modal-content h3 {
@@ -456,7 +455,7 @@
     <div id="loading-spinner"></div>
     <canvas id="bg-canvas"></canvas>
     <header class="ui-element top-left-name">Aitor Quilez Herrero</header>
-
+    
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" aria-label="Cerrar modal">×</button>
@@ -531,7 +530,7 @@
     </div>
 
     <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
-
+    
     <div id="project-tooltip" role="tooltip" aria-hidden="true">
         <img id="tooltip-img" src="" alt="Vista previa del proyecto" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Vista+previa+no+disponible';">
         <p id="tooltip-desc"></p>
@@ -542,99 +541,229 @@
     </div>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const spinner = document.getElementById('loading-spinner');
-            const modalOverlay = document.getElementById('modal-overlay');
-            const modalBody = document.getElementById('modal-body');
-            const modalClose = document.querySelector('.modal-close');
-            const triggers = document.querySelectorAll('.star-trigger');
-            const dropdowns = document.querySelectorAll('.dropdown');
-            const projectLinks = document.querySelectorAll('.project-link');
-            const tooltip = document.getElementById('project-tooltip');
-            window.addEventListener('load', () => {
-                spinner.style.display = 'none';
+    <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}</script>
+    <script type="module">
+        try {
+            const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending } = await import('three');
+            const canvas = document.getElementById('bg-canvas');
+            const scene = new Scene();
+            const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            const renderer = new WebGLRenderer({ canvas, antialias: window.innerWidth > 768 });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+            const particleCount = window.innerWidth <= 768 ? 2000 : 4000;
+            const positions = new Float32Array(particleCount * 3);
+            for(let i = 0; i < positions.length; i++) positions[i] = (Math.random() - 0.5) * 15;
+            const particlesGeometry = new BufferGeometry();
+            particlesGeometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+            const particlesMaterial = new PointsMaterial({ color: 0xcccccc, size: 0.02, sizeAttenuation: true, transparent: true, opacity: 0.6 });
+            const backgroundParticles = new Points(particlesGeometry, particlesMaterial);
+            scene.add(backgroundParticles);
+            const starTriggers = document.querySelectorAll('.star-trigger');
+            const iconParticleSystems = new Map();
+            starTriggers.forEach(trigger => {
+                const particleCount = 10;
+                const positions = new Float32Array(particleCount * 3).fill(0);
+                const velocities = new Float32Array(particleCount * 3);
+                const lifetimes = new Float32Array(particleCount).fill(0);
+                for(let i = 0; i < velocities.length; i++) velocities[i] = (Math.random() - 0.5) * 0.2;
+                const geometry = new BufferGeometry();
+                geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+                geometry.setAttribute('velocity', new Float32BufferAttribute(velocities, 3));
+                geometry.setAttribute('lifetime', new Float32BufferAttribute(lifetimes, 1));
+                const material = new PointsMaterial({ color: 0xcccccc, size: 0.03, sizeAttenuation: true, transparent: true, opacity: 0.8, blending: AdditiveBlending });
+                const particleSystem = new Points(geometry, material);
+                particleSystem.visible = false;
+                scene.add(particleSystem);
+                iconParticleSystems.set(trigger, { system: particleSystem, active: false });
             });
-            
-            document.body.classList.add('no-scroll');
-            function openModal(contentId) {
-                const contentElement = document.getElementById(contentId);
-                if (contentElement) {
-                    modalBody.innerHTML = contentElement.innerHTML;
-                    modalOverlay.classList.add('active');
-                    document.body.classList.remove('no-scroll');
-                }
-            }
-            function closeModal() {
-                modalOverlay.classList.remove('active');
-                document.body.classList.add('no-scroll');
-            }
-
-            modalClose.addEventListener('click', closeModal);
-            modalOverlay.addEventListener('click', (event) => {
-                if (event.target === modalOverlay) {
-                    closeModal();
-                }
-            });
-            function showTooltip(event) {
-                if (window.innerWidth <= 768) return; 
-                const link = event.currentTarget;
-                tooltip.querySelector('#tooltip-img').src = link.dataset.img;
-                tooltip.querySelector('#tooltip-desc').textContent = link.dataset.description;                
-                const demoButton = tooltip.querySelector('#tooltip-demo');
-                const repoButton = tooltip.querySelector('#tooltip-repo');
-                if (link.dataset.demo) {
-                    demoButton.href = link.dataset.demo;
-                    demoButton.classList.remove('hidden');
-                } else {
-                    demoButton.classList.add('hidden');
-                }
-
-                if (link.dataset.repo) {
-                    repoButton.href = link.dataset.repo;
-                    repoButton.classList.remove('hidden');
-                } else {
-                    repoButton.classList.add('hidden');
-                }
-
-                tooltip.classList.add('visible');
-            }
-
-            function hideTooltip() {
-                tooltip.classList.remove('visible');
-            }
-            
-            projectLinks.forEach(link => {
-                link.addEventListener('mouseenter', showTooltip);
-                link.addEventListener('mouseleave', hideTooltip);
-                link.addEventListener('click', (event) => event.preventDefault());
-            });
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', (event) => {
-                    event.stopPropagation(); 
-                    const parentDropdown = trigger.closest('.dropdown');
-                    if (window.innerWidth <= 768) {
-                        const contentId = parentDropdown.dataset.content;
-                        openModal(contentId);
-                    } else {
-                        dropdowns.forEach(d => {
-                            if (d !== parentDropdown) {
-                                d.classList.remove('active');
+            function updateIconParticles() {
+                iconParticleSystems.forEach(({ system, active }, trigger) => {
+                    if (!active || !trigger.offsetParent) return;
+                    const { position, velocity, lifetime } = system.geometry.attributes;
+                    for (let i = 0; i < lifetime.array.length; i++) {
+                        if (lifetime.array[i] > 0) {
+                            position.array[i * 3] += velocity.array[i * 3] * 0.01;
+                            position.array[i * 3 + 1] += velocity.array[i * 3 + 1] * 0.01;
+                            position.array[i * 3 + 2] += velocity.array[i * 3 + 2] * 0.01;
+                            lifetime.array[i] -= 0.01;
+                            if (lifetime.array[i] <= 0) {
+                                position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
+                                lifetime.array[i] = 0;
                             }
-                        });
-                        parentDropdown.classList.toggle('active');
+                        } else if (Math.random() < 0.03) {
+                            position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
+                            velocity.array[i * 3] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 1] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 2] = (Math.random() - 0.5) * 0.2;
+                            lifetime.array[i] = 1;
+                        }
+                    }
+                    position.needsUpdate = lifetime.needsUpdate = true;
+                    const rect = trigger.getBoundingClientRect();
+                    const x = (rect.left + rect.width / 2) / window.innerWidth * 2 - 1;
+                    const y = -(rect.top + rect.height / 2) / window.innerHeight * 2 + 1;
+                    const vector = new Vector3(x, y, 0).unproject(camera);
+                    const dir = vector.sub(camera.position).normalize();
+                    const distance = -camera.position.z / dir.z;
+                    system.position.copy(camera.position.clone().add(dir.multiplyScalar(distance)));
+                });
+            }
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalClose = document.querySelector('.modal-close');
+            const modalBody = document.getElementById('modal-body');
+            const tooltip = document.getElementById('project-tooltip');
+            const tooltipImg = document.getElementById('tooltip-img');
+            const tooltipDesc = document.getElementById('tooltip-desc');
+            const tooltipDemo = document.getElementById('tooltip-demo');
+            const tooltipRepo = document.getElementById('tooltip-repo');
+            const isMobile = window.innerWidth <= 768;
+            function closeAll() {
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    const trigger = dropdown.querySelector('.star-trigger');
+                    if (trigger) {
+                        trigger.setAttribute('aria-expanded', 'false');
+                        trigger.classList.remove('active');
+                        const data = iconParticleSystems.get(trigger);
+                        if (data) {
+                            data.active = false;
+                            data.system.visible = false;
+                        }
                     }
                 });
-            });          
-            document.addEventListener('click', (event) => {
-                if (window.innerWidth > 768) {
-                    if (!event.target.closest('.dropdown')) {
-                        dropdowns.forEach(d => d.classList.remove('active'));
+                modalOverlay.classList.remove('active');
+                tooltip.classList.remove('visible');
+                tooltip.setAttribute('aria-hidden', 'true');
+            }
+            function toggleSection(trigger) {
+                const dropdown = trigger.closest('.dropdown');
+                const contentId = dropdown.dataset.content || trigger.getAttribute('aria-controls');
+                const isActive = dropdown.classList.contains('active');
+                closeAll();
+                if (!isActive) {
+                    dropdown.classList.add('active');
+                    trigger.setAttribute('aria-expanded', 'true');
+                    trigger.classList.add('active');
+                    const data = iconParticleSystems.get(trigger);
+                    if (data) {
+                        data.active = true;
+                        data.system.visible = true;
+                    }
+                    if (isMobile) {
+                        const content = document.getElementById(contentId).innerHTML;
+                        modalBody.innerHTML = content;
+                        modalOverlay.classList.add('active');
+                        document.querySelectorAll('.project-link').forEach(link => {
+                            link.addEventListener('click', handleProjectClick);
+                        });
                     }
                 }
+            }
+            function handleProjectClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const link = e.target.closest('.project-link');
+                if (!link) return;
+                tooltipImg.src = link.dataset.img;
+                tooltipDesc.textContent = link.dataset.description;
+                tooltipDemo.href = link.dataset.demo || '#';
+                tooltipRepo.href = link.dataset.repo || '#';
+                tooltipDemo.classList.toggle('hidden', !link.dataset.demo);
+                tooltip.classList.add('visible');
+                tooltip.setAttribute('aria-hidden', 'false');
+            }
+            starTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleSection(trigger);
+                });
+                trigger.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleSection(trigger);
+                    }
+                });
+                if (!isMobile) {
+                    trigger.addEventListener('mouseenter', () => {
+                        if (!trigger.closest('.dropdown').classList.contains('active')) {
+                            const data = iconParticleSystems.get(trigger);
+                            if (data) {
+                                data.active = data.system.visible = true;
+                                trigger.classList.add('active');
+                            }
+                        }
+                    });
+                    trigger.addEventListener('mouseleave', () => {
+                        if (!trigger.closest('.dropdown').classList.contains('active')) {
+                            const data = iconParticleSystems.get(trigger);
+                            if (data) {
+                                data.active = data.system.visible = false;
+                                trigger.classList.remove('active');
+                            }
+                        }
+                    });
+                }
             });
-        });
+            modalClose?.addEventListener('click', closeAll);
+            modalOverlay?.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeAll();
+            });
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip') && !e.target.closest('.modal-content') && !e.target.closest('.star-trigger')) {
+                    closeAll();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeAll();
+            });
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.addEventListener('click', handleProjectClick);
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleProjectClick(e);
+                    }
+                });
+            });
+            document.addEventListener('click', (e) => {
+                if (!tooltip.contains(e.target) && !e.target.closest('.project-link')) {
+                    tooltip.classList.remove('visible');
+                    tooltip.setAttribute('aria-hidden', 'true');
+                }
+            });
+            const mouse = new Vector2();
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+            const clock = new Clock();
+            function animate() {
+                const elapsedTime = clock.getElapsedTime();
+                backgroundParticles.rotation.y = elapsedTime * 0.05;
+                backgroundParticles.rotation.x = elapsedTime * 0.02;
+                camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.02;
+                camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.02;
+                camera.lookAt(scene.position);
+                updateIconParticles();
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(() => {
+                document.getElementById('loading-spinner').style.display = 'none';
+                animate();
+            });
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
     </script>
 </body>
 </html>
