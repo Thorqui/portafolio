@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aitor Quilez | Portafolio</title>
-    <meta name="description"
-        content="Portafolio de Aitor Quilez - Desarrollador web especializado en JavaScript y Three.js">
+    <meta name="description" content="Portafolio de Aitor Quilez - Desarrollador web especializado en JavaScript y Three.js">
     <link rel="icon" type="image/png" href="Resources/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style>
         :root {
@@ -86,8 +83,7 @@
             user-select: none;
         }
 
-        .star-trigger:hover,
-        .star-trigger.active {
+        .star-trigger:hover, .star-trigger.active {
             color: var(--light-grey);
             transform: scale(1.2) rotate(15deg);
             animation: pulse 1s infinite;
@@ -98,7 +94,6 @@
             to { transform: scale(1.2) rotate(15deg); }
         }
 
-        /* Modal overlay para móviles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -151,7 +146,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Contenido desktop */
         .content-display {
             position: absolute;
             max-height: 0;
@@ -175,7 +169,6 @@
             pointer-events: auto;
         }
 
-        /* Layout proyectos desktop */
         #proyectos {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -193,7 +186,6 @@
             margin-bottom: 0.5vw;
         }
 
-        /* Posicionamiento iconos */
         #proyectos-dropdown {
             top: 70%;
             left: 50%;
@@ -251,8 +243,7 @@
             cursor: pointer;
         }
 
-        .project-link:hover,
-        .project-link.active {
+        .project-link:hover, .project-link.active {
             color: var(--light-grey);
             border-color: var(--dark-grey-border);
             background: rgba(255, 255, 255, 0.1);
@@ -267,7 +258,6 @@
             text-align: center;
         }
 
-        /* Tooltip proyectos */
         #project-tooltip {
             display: none;
             position: fixed;
@@ -328,7 +318,6 @@
             display: none;
         }
 
-        /* Contactos */
         .contact-links {
             display: flex;
             justify-content: flex-end;
@@ -365,7 +354,12 @@
             display: block;
         }
 
-        /* MOBILE SPECIFIC */
+        .project-icon {
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+            color: var(--mid-grey);
+            margin-right: 0.5vw;
+        }
+
         @media (max-width: 768px) {
             .top-left-name {
                 top: 1%;
@@ -381,7 +375,6 @@
                 font-size: clamp(2rem, 8vw, 2.5rem) !important;
             }
 
-            /* Ocultar content-display en móviles, usar modal */
             .content-display {
                 display: none !important;
             }
@@ -444,13 +437,11 @@
         }
     </style>
 </head>
-
 <body>
     <div id="loading-spinner"></div>
     <canvas id="bg-canvas"></canvas>
     <header class="ui-element top-left-name">Aitor Quilez Herrero</header>
     
-    <!-- Modal Overlay para móviles -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" aria-label="Cerrar modal">×</button>
@@ -461,15 +452,39 @@
     <div class="dropdown" id="proyectos-dropdown" role="region" data-content="proyectos-content">
         <i class="bi bi-code-slash star-trigger" tabindex="0" aria-expanded="false" aria-controls="proyectos-content"></i>
         <div class="content-display" id="proyectos-content">
-            <!-- Contenido desktop -->
-            <section id="proyectos-desktop">
+            <section id="proyectos">
                 <div class="subsection">
                     <h3>Projects Studies</h3>
-                    <!-- proyectos aquí -->
+                    <a href="#" class="project-link" data-img="./Resources/Arete.png" data-description="Una web moderna para una academia de baile." data-demo="https://thorqui.github.io/AreteDance/" data-repo="https://github.com/thorqui/AreteDance" aria-label="Ver proyecto Arete Dance">
+                        <i class="bi bi-dash project-icon"></i>Arete Dance
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Street_Figther.png" data-description="Recreación de la pantalla de selección de luchadores." data-demo="https://thorqui.github.io/QHA_LLMM_2Trim/" data-repo="https://github.com/thorqui/QHA_LLMM_2Trim" aria-label="Ver proyecto Street Fighter">
+                        <i class="bi bi-dash project-icon"></i>Street Fighter
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Breaking_Bad_Table.png" data-description="Aplicación que consume y muestra datos de la API de Breaking Bad." data-demo="https://thorqui.github.io/Activ_2_LLMM_BreakingBad/" data-repo="https://github.com/thorqui/Activ_2_LLMM_BreakingBad" aria-label="Ver proyecto Breaking Bad API">
+                        <i class="bi bi-dash project-icon"></i>Breaking Bad API
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/eSports.png" data-description="Sistema de Gestión de Torneos de eSports" data-demo="" data-repo="https://github.com/Thorqui/torneo-esports-uml" aria-label="Ver proyecto Torneo eSports UML">
+                        <i class="bi bi-dash project-icon"></i>Tournament eSports UML
+                    </a>
                 </div>
                 <div class="subsection">
                     <h3>Own Projects</h3>
-                    <!-- proyectos aquí -->
+                    <a href="#" class="project-link" data-img="./Resources/Puzzle.png" data-description="Rompecabezas matemático" data-demo="https://thorqui.github.io/Brain_Puzzle/" data-repo="https://github.com/Thorqui/Brain_Puzzle" aria-label="Ver proyecto Brain Puzzle">
+                        <i class="bi bi-dash project-icon"></i>Brain Puzzle
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Lista_Compra.png" data-description="App lista de la compra online" data-demo="https://thorqui.github.io/Shopping_list/" data-repo="https://github.com/Thorqui/Shopping_list" aria-label="Ver Proyecto Shopping_list">
+                        <i class="bi bi-dash project-icon"></i>Shopping_list
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Docker.png" data-description="Sitio Web Estático con Docker" data-demo="" data-repo="https://github.com/Thorqui/DockerApp" aria-label="Ver Proyecto DockerApp">
+                        <i class="bi bi-dash project-icon"></i>DockerApp
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Docker.png" data-description="Sitio Web Estático con Backend Flask" data-demo="" data-repo="https://github.com/Thorqui/DockerApp_2.0" aria-label="Ver Proyecto DockerApp_2.0">
+                        <i class="bi bi-dash project-icon"></i>DockerApp_2.0
+                    </a>
+                    <a href="#" class="project-link" data-img="./Resources/Python.png" data-description="Organizador de Descargas y Carpetas .exe" data-demo="" data-repo="https://github.com/Thorqui/Script_Files" aria-label="Ver Proyecto Script_Files">
+                        <i class="bi bi-dash project-icon"></i>Script_Files
+                    </a>
                 </div>
             </section>
         </div>
@@ -478,9 +493,9 @@
     <div class="dropdown" id="info-dropdown" role="region" data-content="info-content">
         <i class="bi bi-person star-trigger" tabindex="0" aria-expanded="false" aria-controls="info-content"></i>
         <div class="content-display" id="info-content">
-            <section id="info-desktop">
+            <section id="info">
                 <img id="info-img" src="Resources/Aitor.jpg" alt="Foto de Aitor Quilez">
-                <p>Technology enthusiast transitioning from the chemical industry to software development...</p>
+                <p>Technology enthusiast transitioning from the chemical industry to software development, combining 15+ years of professional experience with newly acquired technical skills. <strong>Currently completing official training in Multiplatform Application Development (DAM) and self-learning emerging technologies.</strong> Seeking a challenging role in a dynamic tech environment where I can apply my project management, teamwork, and communication expertise, contribute with innovative solutions, and grow as a software professional.</p>
             </section>
         </div>
     </div>
@@ -488,117 +503,108 @@
     <div class="dropdown" id="contacto-dropdown" role="region" data-content="contacto-content">
         <i class="bi bi-envelope star-trigger" tabindex="0" aria-expanded="false" aria-controls="contacto-content"></i>
         <div class="content-display" id="contacto-content">
-            <section id="contacto-desktop">
+            <section id="contacto">
                 <p>Open to opportunities</p>
                 <div class="contact-links">
-                    <!-- links de contacto -->
+                    <a href="mailto:aitorquilez@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Enviar correo a Aitor Quilez"><i class="bi bi-envelope"></i></a>
+                    <a href="Resources/CV_QHA.pdf" download="Curriculum_Aitor_Quilez.pdf" class="contact-icon" aria-label="Descargar currículum de Aitor Quilez"><i class="bi bi-file-earmark-text"></i><span class="cv-tooltip">CV (PDF)</span></a>
+                    <a href="https://www.linkedin.com/in/aitor-quilez-817324365/" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/Thorqui" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de GitHub"><i class="bi bi-github"></i></a>
                 </div>
             </section>
         </div>
     </div>
 
-    <!-- Tooltip proyectos -->
+    <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
+    
     <div id="project-tooltip" role="tooltip" aria-hidden="true">
-        <img id="tooltip-img" src="" alt="Vista previa" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=No+disponible';">
+        <img id="tooltip-img" src="" alt="Vista previa del proyecto" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Vista+previa+no+disponible';">
         <p id="tooltip-desc"></p>
         <div class="tooltip-buttons">
-            <a id="tooltip-demo" class="tooltip-button hidden" href="#" target="_blank">Ver Demo</a>
-            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank">Ver Código</a>
+            <a id="tooltip-demo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Demo</a>
+            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Código</a>
         </div>
     </div>
 
-    <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
-
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script type="importmap">
-        {"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}
-    </script>
+    <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}</script>
     <script type="module">
-        // Contenido de secciones (mismo que antes)
-        const contentSections = {
-            'proyectos-content': `
-                <section id="proyectos">
-                    <div class="subsection">
-                        <h3>Projects Studies</h3>
-                        <a href="#" class="project-link" data-img="./Resources/Arete.png" data-description="Web moderna para academia de baile" data-demo="https://thorqui.github.io/AreteDance/" data-repo="https://github.com/thorqui/AreteDance">Arete Dance</a>
-                        <a href="#" class="project-link" data-img="./Resources/Street_Figther.png" data-description="Recreación Street Fighter" data-demo="https://thorqui.github.io/QHA_LLMM_2Trim/" data-repo="https://github.com/thorqui/QHA_LLMM_2Trim">Street Fighter</a>
-                        <!-- más proyectos... -->
-                    </div>
-                    <div class="subsection">
-                        <h3>Own Projects</h3>
-                        <a href="#" class="project-link" data-img="./Resources/Puzzle.png" data-description="Rompecabezas matemático" data-demo="https://thorqui.github.io/Brain_Puzzle/" data-repo="https://github.com/Thorqui/Brain_Puzzle">Brain Puzzle</a>
-                        <!-- más proyectos... -->
-                    </div>
-                </section>
-            `,
-            'info-content': `
-                <section id="info">
-                    <img id="info-img" src="Resources/Aitor.jpg" alt="Foto de Aitor Quilez">
-                    <p>Technology enthusiast transitioning from the chemical industry to software development, combining 15+ years of professional experience with newly acquired technical skills. <strong>Currently completing official training in Multiplatform Application Development (DAM)</strong> Seeking a challenging role in a dynamic tech environment.</p>
-                </section>
-            `,
-            'contacto-content': `
-                <section id="contacto">
-                    <p>Open to opportunities</p>
-                    <div class="contact-links">
-                        <a href="mailto:aitorquilez@gmail.com" class="contact-icon" aria-label="Email"><i class="bi bi-envelope"></i></a>
-                        <a href="Resources/CV_QHA.pdf" download class="contact-icon" aria-label="CV"><i class="bi bi-file-earmark-text"></i><span class="cv-tooltip">CV (PDF)</span></a>
-                        <a href="https://www.linkedin.com/in/aitor-quilez-817324365/" class="contact-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="https://github.com/Thorqui" class="contact-icon" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                    </div>
-                </section>
-            `
-        };
-
         try {
-            // Three.js setup (mismo que antes)
             const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending } = await import('three');
-            
-            // Inicialización canvas y partículas (código igual al anterior)
             const canvas = document.getElementById('bg-canvas');
             const scene = new Scene();
             const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 5;
             const renderer = new WebGLRenderer({ canvas, antialias: window.innerWidth > 768 });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            // Partículas de fondo
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
             const particleCount = window.innerWidth <= 768 ? 2000 : 4000;
-            const positions = new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 15);
+            const positions = new Float32Array(particleCount * 3);
+            for(let i = 0; i < positions.length; i++) positions[i] = (Math.random() - 0.5) * 15;
             const particlesGeometry = new BufferGeometry();
             particlesGeometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
-            const particlesMaterial = new PointsMaterial({ color: 0xcccccc, size: 0.02, transparent: true, opacity: 0.6 });
+            const particlesMaterial = new PointsMaterial({ color: 0xcccccc, size: 0.02, sizeAttenuation: true, transparent: true, opacity: 0.6 });
             const backgroundParticles = new Points(particlesGeometry, particlesMaterial);
             scene.add(backgroundParticles);
-
-            // Elementos DOM
             const starTriggers = document.querySelectorAll('.star-trigger');
-            const modalOverlay = document.getElementById('modal-overlay');
-            const modalClose = document.querySelector('.modal-close');
-            const modalBody = document.getElementById('modal-body');
-            const isMobile = window.innerWidth <= 768;
-
-            // Sistema de partículas para iconos
             const iconParticleSystems = new Map();
             starTriggers.forEach(trigger => {
                 const particleCount = 10;
                 const positions = new Float32Array(particleCount * 3).fill(0);
-                const velocities = new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 0.2);
+                const velocities = new Float32Array(particleCount * 3);
                 const lifetimes = new Float32Array(particleCount).fill(0);
-                
+                for(let i = 0; i < velocities.length; i++) velocities[i] = (Math.random() - 0.5) * 0.2;
                 const geometry = new BufferGeometry();
                 geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
                 geometry.setAttribute('velocity', new Float32BufferAttribute(velocities, 3));
                 geometry.setAttribute('lifetime', new Float32BufferAttribute(lifetimes, 1));
-                
-                const material = new PointsMaterial({ color: 0xcccccc, size: 0.03, transparent: true, opacity: 0.8, blending: AdditiveBlending });
+                const material = new PointsMaterial({ color: 0xcccccc, size: 0.03, sizeAttenuation: true, transparent: true, opacity: 0.8, blending: AdditiveBlending });
                 const particleSystem = new Points(geometry, material);
                 particleSystem.visible = false;
                 scene.add(particleSystem);
                 iconParticleSystems.set(trigger, { system: particleSystem, active: false });
             });
-
-            // Función para cerrar todo
+            function updateIconParticles() {
+                iconParticleSystems.forEach(({ system, active }, trigger) => {
+                    if (!active || !trigger.offsetParent) return;
+                    const { position, velocity, lifetime } = system.geometry.attributes;
+                    for (let i = 0; i < lifetime.array.length; i++) {
+                        if (lifetime.array[i] > 0) {
+                            position.array[i * 3] += velocity.array[i * 3] * 0.01;
+                            position.array[i * 3 + 1] += velocity.array[i * 3 + 1] * 0.01;
+                            position.array[i * 3 + 2] += velocity.array[i * 3 + 2] * 0.01;
+                            lifetime.array[i] -= 0.01;
+                            if (lifetime.array[i] <= 0) {
+                                position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
+                                lifetime.array[i] = 0;
+                            }
+                        } else if (Math.random() < 0.03) {
+                            position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
+                            velocity.array[i * 3] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 1] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 2] = (Math.random() - 0.5) * 0.2;
+                            lifetime.array[i] = 1;
+                        }
+                    }
+                    position.needsUpdate = lifetime.needsUpdate = true;
+                    const rect = trigger.getBoundingClientRect();
+                    const x = (rect.left + rect.width / 2) / window.innerWidth * 2 - 1;
+                    const y = -(rect.top + rect.height / 2) / window.innerHeight * 2 + 1;
+                    const vector = new Vector3(x, y, 0).unproject(camera);
+                    const dir = vector.sub(camera.position).normalize();
+                    const distance = -camera.position.z / dir.z;
+                    system.position.copy(camera.position.clone().add(dir.multiplyScalar(distance)));
+                });
+            }
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalClose = document.querySelector('.modal-close');
+            const modalBody = document.getElementById('modal-body');
+            const tooltip = document.getElementById('project-tooltip');
+            const tooltipImg = document.getElementById('tooltip-img');
+            const tooltipDesc = document.getElementById('tooltip-desc');
+            const tooltipDemo = document.getElementById('tooltip-demo');
+            const tooltipRepo = document.getElementById('tooltip-repo');
+            const isMobile = window.innerWidth <= 768;
             function closeAll() {
                 document.querySelectorAll('.dropdown').forEach(dropdown => {
                     dropdown.classList.remove('active');
@@ -614,60 +620,57 @@
                     }
                 });
                 modalOverlay.classList.remove('active');
-                document.getElementById('project-tooltip').classList.remove('visible');
+                tooltip.classList.remove('visible');
             }
-
-            // Toggle dropdown/modal
             function toggleSection(trigger) {
                 const dropdown = trigger.closest('.dropdown');
                 const contentId = dropdown.dataset.content || trigger.getAttribute('aria-controls');
                 const isActive = dropdown.classList.contains('active');
-                
                 closeAll();
-                
                 if (!isActive) {
-                    // Abrir sección
                     dropdown.classList.add('active');
                     trigger.setAttribute('aria-expanded', 'true');
                     trigger.classList.add('active');
-                    
                     const data = iconParticleSystems.get(trigger);
                     if (data) {
                         data.active = true;
                         data.system.visible = true;
                     }
-                    
                     if (isMobile) {
-                        // Modal móvil
-                        modalBody.innerHTML = contentSections[contentId];
+                        const content = document.getElementById(contentId).innerHTML;
+                        modalBody.innerHTML = content;
                         modalOverlay.classList.add('active');
                         document.querySelectorAll('.project-link').forEach(link => {
                             link.addEventListener('click', handleProjectClick);
                         });
-                    } else {
-                        // Desktop
-                        const content = document.getElementById(contentId);
-                        if (content) content.style.display = 'block';
                     }
                 }
             }
-
-            // Event listeners
+            function handleProjectClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const link = e.target.closest('.project-link');
+                if (!link) return;
+                tooltipImg.src = link.dataset.img;
+                tooltipDesc.textContent = link.dataset.description;
+                tooltipDemo.href = link.dataset.demo || '#';
+                tooltipRepo.href = link.dataset.repo || '#';
+                tooltipDemo.classList.toggle('hidden', !link.dataset.demo);
+                tooltip.classList.add('visible');
+                tooltip.setAttribute('aria-hidden', 'false');
+            }
             starTriggers.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     toggleSection(trigger);
                 });
-
                 trigger.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
                         toggleSection(trigger);
                     }
                 });
-
-                // Hover effects (solo desktop)
                 if (!isMobile) {
                     trigger.addEventListener('mouseenter', () => {
                         if (!trigger.closest('.dropdown').classList.contains('active')) {
@@ -678,7 +681,6 @@
                             }
                         }
                     });
-
                     trigger.addEventListener('mouseleave', () => {
                         if (!trigger.closest('.dropdown').classList.contains('active')) {
                             const data = iconParticleSystems.get(trigger);
@@ -690,77 +692,63 @@
                     });
                 }
             });
-
-            // Cierre modal
             modalClose.addEventListener('click', closeAll);
             modalOverlay.addEventListener('click', (e) => {
                 if (e.target === modalOverlay) closeAll();
             });
-
-            // Teclado escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeAll();
-            });
-
-            // Click fuera de dropdowns (desktop)
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip')) {
+                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip') && !e.target.closest('.modal-content')) {
                     closeAll();
                 }
             });
-
-            // Tooltips proyectos
-            function handleProjectClick(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const tooltip = document.getElementById('project-tooltip');
-                const tooltipImg = document.getElementById('tooltip-img');
-                const tooltipDesc = document.getElementById('tooltip-desc');
-                const tooltipDemo = document.getElementById('tooltip-demo');
-                const tooltipRepo = document.getElementById('tooltip-repo');
-                
-                tooltipImg.src = e.target.dataset.img;
-                tooltipDesc.textContent = e.target.dataset.description;
-                tooltipDemo.href = e.target.dataset.demo || '#';
-                tooltipRepo.href = e.target.dataset.repo || '#';
-                tooltipDemo.classList.toggle('hidden', !e.target.dataset.demo);
-                tooltip.classList.add('visible');
-            }
-
-            // Animación y render (mismo código three.js)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeAll();
+            });
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.addEventListener('click', handleProjectClick);
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleProjectClick(e);
+                    }
+                });
+            });
+            document.addEventListener('click', (e) => {
+                if (!tooltip.contains(e.target) && !e.target.closest('.project-link')) {
+                    tooltip.classList.remove('visible');
+                    tooltip.setAttribute('aria-hidden', 'true');
+                }
+            });
             const mouse = new Vector2();
             window.addEventListener('mousemove', (e) => {
                 mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
             });
-
             const clock = new Clock();
             function animate() {
                 const elapsedTime = clock.getElapsedTime();
                 backgroundParticles.rotation.y = elapsedTime * 0.05;
+                backgroundParticles.rotation.x = elapsedTime * 0.02;
                 camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.02;
                 camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.02;
                 camera.lookAt(scene.position);
+                updateIconParticles();
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             }
-
             requestAnimationFrame(() => {
                 document.getElementById('loading-spinner').style.display = 'none';
                 animate();
             });
-
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
-
         } catch (error) {
             console.error('Error:', error);
             document.getElementById('loading-spinner').style.display = 'none';
         }
     </script>
 </body>
-
 </html>
