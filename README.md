@@ -1,4 +1,4 @@
-### Aitor Quilez Portafolio
+##### Aitor Quilez Portafolio
 
 Portafolio web interactivo de Aitor Quilez Herrero, desarrollador web especializado en JavaScript y Three.js. Una experiencia visual inmersiva con efectos 3D, partículas animadas y navegación intuitiva.
 
@@ -129,3 +129,4 @@ Proyecto personal - © 2025 Aitor Quilez Herrero (Thorqui)
 Email: aitorquilez@gmail.com  
 GitHub: Thorqui  
 LinkedIn: Aitor Quilez  
+
