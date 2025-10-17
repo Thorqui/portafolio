@@ -76,7 +76,7 @@
 
         .dropdown {
             position: fixed;
-            z-index: 1;
+            z-index: 100;
             padding: 3vw;
         }
 
@@ -86,6 +86,7 @@
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
             display: inline-block;
+            user-select: none;
         }
 
         .star-trigger:hover,
@@ -99,7 +100,6 @@
             50% {
                 transform: scale(1.3) rotate(15deg);
             }
-
             to {
                 transform: scale(1.2) rotate(15deg);
             }
@@ -109,22 +109,33 @@
             position: absolute;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            padding: 0 1vw;
+            transition: all 0.4s ease-out;
+            padding: 0;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 4px;
             width: min(90vw, 600px);
             margin: 0 auto;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            box-sizing: border-box;
         }
 
-        .dropdown:hover .content-display,
         .dropdown.active .content-display {
             max-height: 500px;
             padding: 1.5vw 1vw;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .content-display section {
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         #proyectos {
@@ -163,7 +174,7 @@
         }
 
         #info-dropdown .content-display {
-            top: 60%;
+            top: 100%;
             left: 0;
             display: flex;
             align-items: center;
@@ -220,35 +231,44 @@
 
         #project-tooltip {
             display: none;
-            position: absolute;
-            z-index: 10;
+            position: fixed;
+            z-index: 1000;
             background-color: #2a2a2a;
             border: 1px solid var(--mid-grey);
             border-radius: 8px;
-            padding: 1vw;
+            padding: 1rem;
             width: min(80vw, 300px);
+            max-height: 70vh;
+            overflow-y: auto;
             pointer-events: all;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
             text-align: left;
             box-sizing: border-box;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
         }
 
         #project-tooltip.visible {
             display: block;
             opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         #project-tooltip img {
             width: 100%;
+            height: 150px;
+            object-fit: cover;
             border-radius: 4px;
-            margin-bottom: 0.75vw;
+            margin-bottom: 1rem;
         }
 
         .tooltip-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 0.75vw;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .tooltip-buttons.single-button {
@@ -258,10 +278,12 @@
         .tooltip-button {
             color: var(--light-grey);
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.5vw 1vw;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
             text-decoration: none;
             transition: background 0.3s ease;
+            flex: 1;
+            text-align: center;
         }
 
         .tooltip-button:hover {
@@ -272,26 +294,11 @@
             display: none;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
         .star-trigger:focus,
         .project-link:focus,
         .tooltip-button:focus {
             outline: 2px solid var(--dark-grey-border);
             outline-offset: 2px;
-        }
-
-        .star-trigger:focus+.content-display {
-            max-height: 500px;
-            padding: 1.5vw 1vw;
         }
 
         .contact-links {
@@ -342,23 +349,22 @@
             margin-right: 0.5vw;
         }
 
-        /* Mejoras para Mobile */
+        /* MOBILE OPTIMIZATIONS */
         @media (max-width: 768px) {
             .ui-element,
             .dropdown {
-                padding: 2vw 3vw;
+                padding: 2vw;
             }
 
             .top-left-name {
-                top: 2%;
+                top: 1%;
                 left: 3%;
                 font-size: clamp(1rem, 4vw, 1.3rem);
-                text-align: left;
             }
 
             #info-dropdown {
-                top: 15%;
-                left: 3%;
+                top: 18%;
+                left: 5%;
             }
 
             #proyectos-dropdown {
@@ -368,218 +374,134 @@
             }
 
             #contacto-dropdown {
-                top: 15%;
-                right: 3%;
+                top: 18%;
+                right: 5%;
             }
 
+            /* Mobile content display */
             .content-display {
-                width: min(95vw, 300px);
-                max-height: 70vh !important;
-                overflow-y: auto;
-                padding: 0 1vw;
-                margin: 0;
-                position: fixed;
-                z-index: 100;
-                background: rgba(26, 26, 26, 0.95);
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-height: none !important;
+                background: rgba(26, 26, 26, 0.98);
                 backdrop-filter: blur(10px);
-                border: 1px solid var(--dark-grey-border);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                border-radius: 0 !important;
+                margin: 0 !important;
+                transform: none !important;
+                z-index: 999;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                box-sizing: border-box;
             }
 
-            .dropdown:hover .content-display,
             .dropdown.active .content-display {
-                max-height: 70vh;
-                padding: 1vw;
-                animation: slideDownMobile 0.4s ease-out;
+                max-height: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: all !important;
+                padding: 2rem;
             }
 
-            @keyframes slideDownMobile {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
+            /* Mobile projects layout */
             #proyectos {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 1rem;
-                max-height: 60vh;
-                overflow-y: auto;
-                padding: 1rem;
+                gap: 1.5rem !important;
+                width: 100%;
+                max-width: 400px;
+                padding: 0;
             }
 
             .subsection {
-                margin-bottom: 1.5rem;
+                margin-bottom: 0;
             }
 
             .subsection h3 {
-                font-size: 0.9rem;
-                margin-bottom: 0.8rem;
+                font-size: 1rem;
+                margin-bottom: 1rem;
                 color: var(--light-grey);
                 border-bottom: 1px solid var(--dark-grey-border);
-                padding-bottom: 0.3rem;
+                padding-bottom: 0.5rem;
             }
 
+            .project-link {
+                padding: 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Mobile tooltip */
             #project-tooltip {
                 width: 90vw !important;
-                max-width: 350px;
-                max-height: 60vh;
-                overflow-y: auto;
-                position: fixed !important;
-                top: 50% !important;
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important;
-                z-index: 1000;
-                background: var(--dark-grey);
-                border: 1px solid var(--dark-grey-border);
-                padding: 1rem;
-                border-radius: 8px;
-            }
-
-            #project-tooltip.visible {
-                display: block;
-                opacity: 1;
-                animation: fadeInUp 0.3s ease-out;
-            }
-
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translate(-50%, -60%);
-                }
-                to {
-                    opacity: 1;
-                    transform: translate(-50%, -50%);
-                }
-            }
-
-            #project-tooltip img {
-                width: 100%;
-                height: 150px;
-                object-fit: cover;
-                border-radius: 4px;
-            }
-
-            .tooltip-buttons {
-                margin-top: 1rem;
-                gap: 0.5rem;
-            }
-
-            .tooltip-button {
-                flex: 1;
-                padding: 0.8rem;
-                text-align: center;
-                font-size: 0.9rem;
+                max-height: 70vh;
+                padding: 1.5rem;
             }
 
             .star-trigger {
-                font-size: clamp(1.8rem, 6vw, 2.2rem) !important;
+                font-size: clamp(2rem, 8vw, 2.5rem) !important;
             }
 
             .contact-links {
+                flex-direction: row !important;
+                gap: 1.5rem;
+                justify-content: center;
+            }
+
+            #info-dropdown .content-display {
+                display: flex;
                 flex-direction: column;
-                gap: 0.8rem;
-                align-items: center;
+                align-items: flex-start;
+                text-align: left;
+                padding: 2rem;
             }
 
-            .contact-icon {
-                font-size: clamp(1.2rem, 3vw, 1.4rem);
-            }
-
-            .content-display::-webkit-scrollbar {
-                width: 4px;
-            }
-
-            .content-display::-webkit-scrollbar-track {
-                background: transparent;
-            }
-
-            .content-display::-webkit-scrollbar-thumb {
-                background: var(--mid-grey);
-                border-radius: 2px;
-            }
-
-            #info-content {
-                max-width: 280px;
-            }
-
-            #info-content p {
-                font-size: 0.85rem;
-                line-height: 1.4;
+            #contacto-dropdown .content-display {
+                text-align: center;
+                padding: 2rem;
             }
 
             #info-img {
-                width: 60px;
-                height: 60px;
+                width: 70px;
+                height: 70px;
+                margin-bottom: 1rem;
             }
 
-            #proyectos-dropdown .content-display,
-            #contacto-dropdown .content-display {
-                text-align: left;
+            #info-content p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                max-width: 300px;
             }
         }
 
         @media (max-width: 480px) {
             .content-display {
-                width: 96vw;
-                padding: 0 0.5vw;
-                max-height: 65vh !important;
+                padding: 1rem;
             }
-
+            
             #proyectos {
-                padding: 0.5rem;
-                gap: 0.8rem;
+                gap: 1rem !important;
             }
-
+            
             .project-link {
                 padding: 0.8rem;
-                font-size: 0.85rem;
-            }
-
-            .top-left-name {
-                font-size: clamp(0.9rem, 5vw, 1.1rem);
-            }
-
-            #info-dropdown,
-            #contacto-dropdown {
-                top: 10%;
+                font-size: 0.9rem;
             }
         }
 
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .content-display {
-                width: min(70vw, 500px);
-                max-height: 80vh;
-            }
-            
-            #proyectos {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .content-display {
-                max-height: 60vh !important;
-            }
-            
-            #proyectos {
-                max-height: 50vh;
-            }
-        }
-
+        /* iOS Safari fixes */
         @supports (-webkit-touch-callout: none) {
             .content-display {
                 -webkit-overflow-scrolling: touch;
             }
-            
             .star-trigger {
                 -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
             }
         }
 
@@ -587,10 +509,22 @@
             *,
             *::before,
             *::after {
-                animation-duration: 0.01ms;
-                animation-iteration-count: 1;
-                transition-duration: 0.01ms;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
+        }
+
+        /* Custom scrollbar for mobile */
+        .content-display::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-display::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .content-display::-webkit-scrollbar-thumb {
+            background: var(--mid-grey);
+            border-radius: 3px;
         }
     </style>
 </head>
@@ -599,9 +533,9 @@
     <div id="loading-spinner"></div>
     <canvas id="bg-canvas"></canvas>
     <header class="ui-element top-left-name">Aitor Quilez Herrero</header>
+    
     <div class="dropdown" id="proyectos-dropdown" role="region">
-        <i class="bi bi-code-slash star-trigger" tabindex="0" aria-expanded="false"
-            aria-controls="proyectos-content"></i>
+        <i class="bi bi-code-slash star-trigger" tabindex="0" aria-expanded="false" aria-controls="proyectos-content"></i>
         <div class="content-display" id="proyectos-content">
             <section id="proyectos">
                 <div class="subsection">
@@ -664,6 +598,7 @@
             </section>
         </div>
     </div>
+
     <div class="dropdown" id="info-dropdown" role="region">
         <i class="bi bi-person star-trigger" tabindex="0" aria-expanded="false" aria-controls="info-content"></i>
         <div class="content-display" id="info-content">
@@ -679,6 +614,7 @@
             </section>
         </div>
     </div>
+
     <div class="dropdown" id="contacto-dropdown" role="region">
         <i class="bi bi-envelope star-trigger" tabindex="0" aria-expanded="false" aria-controls="contacto-content"></i>
         <div class="content-display" id="contacto-content">
@@ -686,38 +622,38 @@
                 <p>Open to opportunities</p>
                 <div class="contact-links">
                     <a href="mailto:aitorquilez@gmail.com" target="_blank" rel="noopener noreferrer"
-                        class="contact-icon" aria-label="Enviar correo a Aitor Quilez"><i
-                            class="bi bi-envelope"></i></a>
+                        class="contact-icon" aria-label="Enviar correo a Aitor Quilez"><i class="bi bi-envelope"></i></a>
                     <a href="Resources/CV_QHA.pdf" download="Curriculum_Aitor_Quilez.pdf" class="contact-icon"
-                        aria-label="Descargar currículum de Aitor Quilez"><i class="bi bi-file-earmark-text"></i><span
-                            class="cv-tooltip">CV (PDF)</span></a>
+                        aria-label="Descargar currículum de Aitor Quilez"><i class="bi bi-file-earmark-text"></i><span class="cv-tooltip">CV (PDF)</span></a>
                     <a href="https://www.linkedin.com/in/aitor-quilez-817324365/" target="_blank"
-                        rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de LinkedIn"><i
-                            class="bi bi-linkedin"></i></a>
+                        rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de LinkedIn"><i class="bi bi-linkedin"></i></a>
                     <a href="https://github.com/Thorqui" target="_blank" rel="noopener noreferrer" class="contact-icon"
                         aria-label="Perfil de GitHub"><i class="bi bi-github"></i></a>
                 </div>
             </section>
         </div>
     </div>
+
     <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
+    
     <div id="project-tooltip" role="tooltip" aria-hidden="true">
         <img id="tooltip-img" src="" alt="Vista previa del proyecto" loading="lazy"
             onerror="this.src='https://via.placeholder.com/300x150?text=Vista+previa+no+disponible';">
         <p id="tooltip-desc"></p>
         <div class="tooltip-buttons">
             <a id="tooltip-demo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Demo</a>
-            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver
-                Código</a>
+            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Código</a>
         </div>
     </div>
+
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}</script>
     <script type="module">
         try {
             const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending } = await import('three');
+            
+            // Three.js setup
             const canvas = document.getElementById('bg-canvas');
-            if (!canvas) throw new Error('Canvas no encontrado');
             const scene = new Scene();
             const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 5;
@@ -725,52 +661,76 @@
             const renderer = new WebGLRenderer({ canvas, antialias: !isMobile });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5));
-            const particleCount = 4000;
+
+            // Background particles
+            const particleCount = isMobile ? 2000 : 4000;
             const positions = new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 15);
             const particlesGeometry = new BufferGeometry();
             particlesGeometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
-            const particlesMaterial = new PointsMaterial({ color: 0xcccccc, size: 0.02, sizeAttenuation: true, transparent: true, opacity: 0.8 });
+            const particlesMaterial = new PointsMaterial({ 
+                color: 0xcccccc, 
+                size: 0.02, 
+                sizeAttenuation: true, 
+                transparent: true, 
+                opacity: 0.6 
+            });
             const backgroundParticles = new Points(particlesGeometry, particlesMaterial);
             scene.add(backgroundParticles);
+
+            // Icon particle systems
             const starTriggers = document.querySelectorAll('.star-trigger');
             const iconParticleSystems = new Map();
             starTriggers.forEach(trigger => {
-                const particleCount = 15;
+                const particleCount = 10;
                 const positions = new Float32Array(particleCount * 3).fill(0);
-                const velocities = new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 0.3);
+                const velocities = new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 0.2);
                 const lifetimes = new Float32Array(particleCount).fill(0);
+                
                 const geometry = new BufferGeometry();
                 geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
                 geometry.setAttribute('velocity', new Float32BufferAttribute(velocities, 3));
                 geometry.setAttribute('lifetime', new Float32BufferAttribute(lifetimes, 1));
-                const material = new PointsMaterial({ color: 0xcccccc, size: 0.04, sizeAttenuation: true, transparent: true, opacity: 0.8, blending: AdditiveBlending });
+                
+                const material = new PointsMaterial({ 
+                    color: 0xcccccc, 
+                    size: 0.03, 
+                    sizeAttenuation: true, 
+                    transparent: true, 
+                    opacity: 0.8, 
+                    blending: AdditiveBlending 
+                });
+                
                 const particleSystem = new Points(geometry, material);
                 particleSystem.visible = false;
                 scene.add(particleSystem);
                 iconParticleSystems.set(trigger, { system: particleSystem, active: false });
             });
+
             function updateIconParticles() {
                 iconParticleSystems.forEach(({ system, active }, trigger) => {
-                    if (!active) return;
+                    if (!active || !trigger.offsetParent) return;
+                    
                     const { position, velocity, lifetime } = system.geometry.attributes;
                     for (let i = 0; i < lifetime.array.length; i++) {
                         if (lifetime.array[i] > 0) {
-                            position.array[i * 3] += velocity.array[i * 3] * 0.02;
-                            position.array[i * 3 + 1] += velocity.array[i * 3 + 1] * 0.02;
-                            position.array[i * 3 + 2] += velocity.array[i * 3 + 2] * 0.02;
-                            lifetime.array[i] -= 0.02;
+                            position.array[i * 3] += velocity.array[i * 3] * 0.01;
+                            position.array[i * 3 + 1] += velocity.array[i * 3 + 1] * 0.01;
+                            position.array[i * 3 + 2] += velocity.array[i * 3 + 2] * 0.01;
+                            lifetime.array[i] -= 0.01;
                             if (lifetime.array[i] <= 0) {
-                                position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = lifetime.array[i] = 0;
+                                position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
+                                lifetime.array[i] = 0;
                             }
-                        } else if (Math.random() < 0.05) {
+                        } else if (Math.random() < 0.03) {
                             position.array[i * 3] = position.array[i * 3 + 1] = position.array[i * 3 + 2] = 0;
-                            velocity.array[i * 3] = (Math.random() - 0.5) * 0.3;
-                            velocity.array[i * 3 + 1] = (Math.random() - 0.5) * 0.3;
-                            velocity.array[i * 3 + 2] = (Math.random() - 0.5) * 0.3;
+                            velocity.array[i * 3] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 1] = (Math.random() - 0.5) * 0.2;
+                            velocity.array[i * 3 + 2] = (Math.random() - 0.5) * 0.2;
                             lifetime.array[i] = 1;
                         }
                     }
                     position.needsUpdate = lifetime.needsUpdate = true;
+                    
                     const rect = trigger.getBoundingClientRect();
                     const x = (rect.left + rect.width / 2) / window.innerWidth * 2 - 1;
                     const y = -(rect.top + rect.height / 2) / window.innerHeight * 2 + 1;
@@ -780,128 +740,226 @@
                     system.position.copy(camera.position.clone().add(dir.multiplyScalar(distance)));
                 });
             }
-            starTriggers.forEach(trigger => {
-                trigger.addEventListener('mouseenter', () => {
-                    const data = iconParticleSystems.get(trigger);
-                    data.system.visible = data.active = true;
-                    trigger.classList.add('active');
+
+            // Dropdown toggle functionality
+            function toggleDropdown(trigger, isMobile = window.innerWidth <= 768) {
+                const dropdown = trigger.closest('.dropdown');
+                const content = document.getElementById(trigger.getAttribute('aria-controls'));
+                const isExpanded = dropdown.classList.contains('active');
+                
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                        const otherTrigger = d.querySelector('.star-trigger');
+                        if (otherTrigger) {
+                            otherTrigger.setAttribute('aria-expanded', 'false');
+                            otherTrigger.classList.remove('active');
+                            const data = iconParticleSystems.get(otherTrigger);
+                            if (data) data.active = false;
+                        }
+                    }
                 });
-                trigger.addEventListener('mouseleave', () => {
-                    const data = iconParticleSystems.get(trigger);
-                    data.system.visible = data.active = false;
+
+                if (isExpanded) {
+                    // Close current
+                    dropdown.classList.remove('active');
+                    trigger.setAttribute('aria-expanded', 'false');
                     trigger.classList.remove('active');
+                    const data = iconParticleSystems.get(trigger);
+                    if (data) data.active = false;
+                } else {
+                    // Open current
+                    dropdown.classList.add('active');
+                    trigger.setAttribute('aria-expanded', 'true');
+                    trigger.classList.add('active');
+                    const data = iconParticleSystems.get(trigger);
+                    if (data) {
+                        data.active = true;
+                        data.system.visible = true;
+                    }
+                }
+            }
+
+            starTriggers.forEach(trigger => {
+                // Mouse events
+                trigger.addEventListener('mouseenter', () => {
+                    if (!trigger.closest('.dropdown').classList.contains('active')) {
+                        const data = iconParticleSystems.get(trigger);
+                        if (data) {
+                            data.system.visible = data.active = true;
+                            trigger.classList.add('active');
+                        }
+                    }
                 });
+
+                trigger.addEventListener('mouseleave', () => {
+                    const dropdown = trigger.closest('.dropdown');
+                    if (!dropdown.classList.contains('active')) {
+                        const data = iconParticleSystems.get(trigger);
+                        if (data) {
+                            data.system.visible = data.active = false;
+                            trigger.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Click/tap to toggle
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleDropdown(trigger);
+                });
+
+                // Keyboard
+                trigger.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleDropdown(trigger);
+                    }
+                });
+
                 trigger.addEventListener('focus', () => {
                     const data = iconParticleSystems.get(trigger);
-                    data.system.visible = data.active = true;
-                    trigger.classList.add('active');
+                    if (data) {
+                        data.system.visible = data.active = true;
+                        trigger.classList.add('active');
+                    }
                 });
+
                 trigger.addEventListener('blur', () => {
-                    const data = iconParticleSystems.get(trigger);
-                    data.system.visible = data.active = false;
-                    trigger.classList.remove('active');
-                });
-                trigger.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === 'Space') {
-                        e.preventDefault();
-                        const content = document.getElementById(trigger.getAttribute('aria-controls'));
-                        content.style.maxHeight = content.style.maxHeight === '0px' ? '70vh' : '0px';
-                        content.style.padding = content.style.maxHeight === '0px' ? '0 0.5vw' : '1vw 0.5vw';
-                        trigger.setAttribute('aria-expanded', trigger.getAttribute('aria-expanded') === 'false');
-                        trigger.classList.toggle('active', content.style.maxHeight !== '0px');
+                    const dropdown = trigger.closest('.dropdown');
+                    if (!dropdown.classList.contains('active')) {
+                        const data = iconParticleSystems.get(trigger);
+                        if (data) {
+                            data.system.visible = data.active = false;
+                            trigger.classList.remove('active');
+                        }
                     }
                 });
             });
+
+            // Close dropdowns on outside click
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const trigger = dropdown.querySelector('.star-trigger');
+                        if (trigger) {
+                            trigger.setAttribute('aria-expanded', 'false');
+                            trigger.classList.remove('active');
+                            const data = iconParticleSystems.get(trigger);
+                            if (data) data.active = false;
+                        }
+                    });
+                }
+            });
+
+            // Close on escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const trigger = dropdown.querySelector('.star-trigger');
+                        if (trigger) {
+                            trigger.setAttribute('aria-expanded', 'false');
+                            trigger.classList.remove('active');
+                            const data = iconParticleSystems.get(trigger);
+                            if (data) data.active = false;
+                        }
+                    });
+                }
+            });
+
+            // Project tooltips
             const tooltip = document.getElementById('project-tooltip');
             const tooltipImg = document.getElementById('tooltip-img');
             const tooltipDesc = document.getElementById('tooltip-desc');
             const tooltipDemo = document.getElementById('tooltip-demo');
             const tooltipRepo = document.getElementById('tooltip-repo');
             const projectLinks = document.querySelectorAll('.project-link');
-            let popperInstance = null;
             let activeLink = null;
+
             function showTooltip(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                
                 if (activeLink) {
                     activeLink.classList.remove('active');
                     activeLink.setAttribute('aria-expanded', 'false');
                 }
+                
                 activeLink = e.target;
                 activeLink.classList.add('active');
-                activeLink.setAttribute('aria-expanded', 'true');
+                
                 tooltipImg.src = e.target.dataset.img;
                 tooltipDesc.textContent = e.target.dataset.description;
-                tooltipDemo.href = e.target.dataset.demo;
-                tooltipRepo.href = e.target.dataset.repo;
+                tooltipDemo.href = e.target.dataset.demo || '#';
+                tooltipRepo.href = e.target.dataset.repo || '#';
                 tooltipDemo.classList.toggle('hidden', !e.target.dataset.demo);
                 tooltip.classList.toggle('single-button', !e.target.dataset.demo);
                 tooltip.classList.add('visible');
                 tooltip.setAttribute('aria-hidden', 'false');
-                const isMobile = window.innerWidth <= 768;
-                if (isMobile) {
-                    tooltip.style.position = 'fixed';
-                    tooltip.style.top = '50%';
-                    tooltip.style.left = '50%';
-                    tooltip.style.transform = 'translate(-50%, -50%)';
-                } else {
-                    const isLeftBlock = e.target.closest('.subsection:first-child') !== null;
-                    const placement = isLeftBlock ? 'left' : 'right';
-                    if (popperInstance) popperInstance.destroy();
-                    popperInstance = Popper.createPopper(e.target, tooltip, {
-                        placement,
-                        modifiers: [
-                            { name: 'offset', options: { offset: [0, 10] } },
-                            { name: 'preventOverflow', options: { padding: 10, boundariesElement: 'viewport' } },
-                            { name: 'flip', options: { fallbackPlacements: [] } },
-                            { name: 'computeStyles', options: { adaptive: false } }
-                        ]
-                    });
-                    const tooltipHeight = tooltip.offsetHeight;
-                    const linkRect = e.target.getBoundingClientRect();
-                    tooltip.style.transform = `translateY(${(linkRect.height - tooltipHeight) / 2}px)`;
-                }
             }
+
             function hideTooltip() {
                 if (activeLink) {
                     activeLink.classList.remove('active');
                     activeLink.setAttribute('aria-expanded', 'false');
+                    activeLink = null;
                 }
                 tooltip.classList.remove('visible', 'single-button');
                 tooltip.setAttribute('aria-hidden', 'true');
                 tooltipDemo.classList.remove('hidden');
-                if (popperInstance) popperInstance.destroy();
-                activeLink = popperInstance = null;
             }
+
             projectLinks.forEach(link => {
-                link.addEventListener('click', e => {
-                    if (activeLink === e.target) hideTooltip();
-                    else showTooltip(e);
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (activeLink === link) {
+                        hideTooltip();
+                    } else {
+                        showTooltip(e);
+                    }
                 });
-                link.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === 'Space') {
+
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        if (activeLink === e.target) hideTooltip();
-                        else showTooltip(e);
+                        e.stopPropagation();
+                        if (activeLink === link) {
+                            hideTooltip();
+                        } else {
+                            showTooltip(e);
+                        }
                     }
                 });
             });
-            document.addEventListener('click', e => {
-                if (!tooltip.contains(e.target) && !Array.from(projectLinks).some(link => link.contains(e.target))) {
+
+            // Close tooltip on outside click or escape
+            document.addEventListener('click', (e) => {
+                if (!tooltip.contains(e.target) && !projectLinks.contains(e.target)) {
                     hideTooltip();
                 }
             });
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape') hideTooltip();
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && activeLink) {
+                    hideTooltip();
+                }
             });
+
+            // Mouse tracking and animation
             const mouse = new Vector2();
-            window.addEventListener('mousemove', e => {
+            window.addEventListener('mousemove', (e) => {
                 mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
             });
+
             const clock = new Clock();
             let isRendering = true;
             let lastFrameTime = 0;
             const frameInterval = 1000 / 30;
+
             function animate(currentTime) {
                 if (!isRendering) return;
                 if (currentTime - lastFrameTime < frameInterval) {
@@ -909,30 +967,37 @@
                     return;
                 }
                 lastFrameTime = currentTime;
+
                 const elapsedTime = clock.getElapsedTime();
                 backgroundParticles.rotation.y = elapsedTime * 0.05;
                 backgroundParticles.rotation.x = elapsedTime * 0.02;
+                
                 camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.02;
                 camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.02;
                 camera.lookAt(scene.position);
+                
                 updateIconParticles();
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             }
-            requestAnimationFrame(time => {
+
+            requestAnimationFrame((time) => {
                 animate(time);
                 document.getElementById('loading-spinner').style.display = 'none';
             });
+
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5));
             });
+
             document.addEventListener('visibilitychange', () => {
                 isRendering = !document.hidden;
             });
+
         } catch (error) {
+            console.error('Error initializing Three.js:', error);
             document.getElementById('loading-spinner').style.display = 'none';
         }
     </script>
