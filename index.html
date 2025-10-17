@@ -150,20 +150,19 @@
             position: absolute;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.4s ease-out;
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
             padding: 0;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            width: min(90vw, 600px);
-            margin: 0 auto;
+            background: transparent;
+            border: none;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            z-index: 150;
         }
 
         .dropdown.active .content-display {
             max-height: 500px;
-            padding: 1.5vw 1vw;
+            padding: 1rem;
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
@@ -172,7 +171,7 @@
         #proyectos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5vw;
+            gap: 1rem;
             justify-content: center;
         }
 
@@ -183,11 +182,13 @@
 
         .subsection h3 {
             font-size: clamp(0.9rem, 2vw, 1rem);
-            margin-bottom: 0.5vw;
+            margin-bottom: 1rem;
+            color: var(--light-grey);
+            opacity: 0.9;
         }
 
         #proyectos-dropdown {
-            top: 70%;
+            top: 80%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
@@ -196,20 +197,35 @@
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            text-align: center;
+            width: min(90vw, 600px);
+            max-width: 600px;
         }
 
         #info-dropdown {
-            top: 40%;
+            top: 50%;
             left: 10%;
         }
 
         #info-dropdown .content-display {
+            top: 40%;
+            left: 20%;
+            transform: translate(-20%, -40%);
+            width: 800px;
+            max-width: 90vw;
+            margin-top: 60px;
+        }
+
+        #contacto-dropdown {
+            top: 40%;
+            right: 10%;
+        }
+
+        #contacto-dropdown .content-display {
             top: 100%;
-            left: 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            right: 0;
+            width: 300px;
+            max-width: 350px;
+            text-align: center;
         }
 
         #info-img {
@@ -217,30 +233,21 @@
             height: 80px;
             border-radius: 8px;
             object-fit: cover;
-            opacity: 0.6;
-        }
-
-        #contacto-dropdown {
-            top: 30%;
-            right: 10%;
-        }
-
-        #contacto-dropdown .content-display {
-            top: 100%;
-            right: 0;
-            text-align: right;
+            opacity: 0.8;
+            margin-bottom: 1rem;
         }
 
         .project-link {
             display: block;
             color: var(--mid-grey);
             text-decoration: none;
-            margin-bottom: 0.75vw;
-            padding: 0.75vw;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
             border: 1px solid transparent;
             border-radius: 4px;
             transition: all 0.3s ease;
             cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .project-link:hover, .project-link.active {
@@ -259,10 +266,9 @@
         }
 
         #project-tooltip {
-            display: none;
             position: fixed;
             z-index: 1001;
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.95);
             border: 1px solid var(--mid-grey);
             border-radius: 8px;
             padding: 1rem;
@@ -270,18 +276,21 @@
             max-height: 70vh;
             overflow-y: auto;
             opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
             text-align: left;
             box-sizing: border-box;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
+            pointer-events: none;
         }
 
         #project-tooltip.visible {
-            display: block;
             opacity: 1;
+            visibility: visible;
             transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
         }
 
         #project-tooltip img {
@@ -320,14 +329,16 @@
 
         .contact-links {
             display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .contact-icon {
             color: var(--mid-grey);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.5rem;
         }
 
         .contact-icon:hover {
@@ -357,7 +368,7 @@
         .project-icon {
             font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             color: var(--mid-grey);
-            margin-right: 0.5vw;
+            margin-right: 0.5rem;
         }
 
         @media (max-width: 768px) {
@@ -368,8 +379,10 @@
             }
 
             #info-dropdown { top: 20%; left: 5%; }
+            #info-dropdown .content-display { display: none !important; }
             #proyectos-dropdown { top: 50%; left: 50%; transform: translate(-50%, -50%); }
             #contacto-dropdown { top: 20%; right: 5%; }
+            #contacto-dropdown .content-display { display: none !important; }
 
             .star-trigger {
                 font-size: clamp(2rem, 8vw, 2.5rem) !important;
@@ -398,6 +411,7 @@
                 padding: 1rem;
                 font-size: 1rem;
                 margin-bottom: 0;
+                background: rgba(255, 255, 255, 0.1);
             }
 
             .modal-content #info {
@@ -621,6 +635,7 @@
                 });
                 modalOverlay.classList.remove('active');
                 tooltip.classList.remove('visible');
+                tooltip.setAttribute('aria-hidden', 'true');
             }
             function toggleSection(trigger) {
                 const dropdown = trigger.closest('.dropdown');
@@ -692,12 +707,12 @@
                     });
                 }
             });
-            modalClose.addEventListener('click', closeAll);
-            modalOverlay.addEventListener('click', (e) => {
+            modalClose?.addEventListener('click', closeAll);
+            modalOverlay?.addEventListener('click', (e) => {
                 if (e.target === modalOverlay) closeAll();
             });
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip') && !e.target.closest('.modal-content')) {
+                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip') && !e.target.closest('.modal-content') && !e.target.closest('.star-trigger')) {
                     closeAll();
                 }
             });
