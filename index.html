@@ -114,30 +114,37 @@
             display: flex;
         }
 
-        .modal-content {
-            background: rgba(26, 26, 26, 0.98);
-            border: 1px solid var(--dark-grey-border);
-            border-radius: 8px;
-            padding: 2rem;
+        .content-display {
+            background: rgba(26, 26, 26, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
             max-width: 90vw;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
 
         .modal-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--mid-grey);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             padding: 0.5rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1001;
         }
 
@@ -147,26 +154,82 @@
         }
 
         .content-display {
-            position: absolute;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
-            padding: 0;
-            background: transparent;
-            border: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%) scale(0.9);
+            width: min(90vw, 800px);
+            max-height: 80vh;
+            overflow-y: auto;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 2rem;
+            background: rgba(30, 30, 30, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
             z-index: 150;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
-        .dropdown.active .content-display {
-            max-height: 500px;
-            padding: 1rem;
+        .content-display.active {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
         }
+        
+        .dropdown {
+            position: fixed;
+            z-index: 100;
+            padding: 3vw;
+        }
+
+        #btn-volver {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light-grey);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #btn-volver:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        #btn-volver.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .star-trigger {
+            transition: all 0.5s ease;
+        }
+        .star-trigger.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
 
         #proyectos {
             display: grid;
@@ -193,39 +256,14 @@
             transform: translate(-50%, -50%);
         }
 
-        #proyectos-dropdown .content-display {
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(90vw, 600px);
-            max-width: 600px;
-        }
-
         #info-dropdown {
             top: 50%;
             left: 10%;
         }
 
-        #info-dropdown .content-display {
-            top: 40%;
-            left: 20%;
-            transform: translate(-20%, -40%);
-            width: 800px;
-            max-width: 90vw;
-            margin-top: 60px;
-        }
-
         #contacto-dropdown {
             top: 40%;
             right: 10%;
-        }
-
-        #contacto-dropdown .content-display {
-            top: 100%;
-            right: 0;
-            width: 300px;
-            max-width: 350px;
-            text-align: center;
         }
 
         #info-img {
@@ -242,18 +280,36 @@
             color: var(--mid-grey);
             text-decoration: none;
             margin-bottom: 0.75rem;
-            padding: 0.75rem;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-20deg);
+            transition: all 0.5s ease;
+        }
+
+        .project-link:hover::before {
+            left: 150%;
         }
 
         .project-link:hover, .project-link.active {
             color: var(--light-grey);
-            border-color: var(--dark-grey-border);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .footer {
@@ -263,33 +319,39 @@
             font-size: clamp(0.6rem, 1.2vw, 0.7rem);
             color: var(--mid-grey);
             text-align: center;
+            letter-spacing: 2px;
+            opacity: 0.5;
         }
 
         #project-tooltip {
             position: fixed;
             z-index: 1001;
-            background: rgba(42, 42, 42, 0.95);
-            border: 1px solid var(--mid-grey);
-            border-radius: 8px;
-            padding: 1rem;
-            width: min(80vw, 300px);
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: min(80vw, 320px);
             max-height: 70vh;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: left;
             box-sizing: border-box;
-            top: 50%;
+            top: auto;
+            bottom: 5%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            transform: translate(-50%, 10%) scale(0.9);
             pointer-events: none;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
         #project-tooltip.visible {
             opacity: 1;
             visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, 0) scale(1);
             pointer-events: auto;
         }
 
@@ -379,20 +441,16 @@
             }
 
             #info-dropdown { top: 20%; left: 5%; }
-            #info-dropdown .content-display { display: none !important; }
-            #proyectos-dropdown { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+            #proyectos-dropdown { top: 75%; left: 50%; transform: translate(-50%, -50%); }
             #contacto-dropdown { top: 20%; right: 5%; }
-            #contacto-dropdown .content-display { display: none !important; }
 
             .star-trigger {
                 font-size: clamp(2rem, 8vw, 2.5rem) !important;
             }
 
-            .content-display {
-                display: none !important;
-            }
+            
 
-            .modal-content h3 {
+            .content-display h3 {
                 font-size: 1.1rem;
                 margin-bottom: 1rem;
                 color: var(--light-grey);
@@ -400,21 +458,21 @@
                 padding-bottom: 0.5rem;
             }
 
-            .modal-content #proyectos {
+            .content-display #proyectos {
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
                 width: 100%;
             }
 
-            .modal-content .project-link {
+            .content-display .project-link {
                 padding: 1rem;
                 font-size: 1rem;
                 margin-bottom: 0;
                 background: rgba(255, 255, 255, 0.1);
             }
 
-            .modal-content #info {
+            .content-display #info {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -422,23 +480,23 @@
                 gap: 1rem;
             }
 
-            .modal-content #info-img {
+            .content-display #info-img {
                 width: 80px;
                 height: 80px;
             }
 
-            .modal-content #info p {
+            .content-display #info p {
                 font-size: 0.95rem;
                 line-height: 1.5;
                 text-align: left;
             }
 
-            .modal-content .contact-links {
+            .content-display .contact-links {
                 justify-content: center;
                 gap: 2rem;
             }
 
-            .modal-content .contact-icon i {
+            .content-display .contact-icon i {
                 font-size: 1.5rem;
             }
         }
@@ -456,12 +514,7 @@
     <canvas id="bg-canvas"></canvas>
     <header class="ui-element top-left-name">Aitor Quilez Herrero</header>
     
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Cerrar modal">×</button>
-            <div id="modal-body"></div>
-        </div>
-    </div>
+
 
     <div class="dropdown" id="proyectos-dropdown" role="region" data-content="proyectos-content">
         <i class="bi bi-code-slash star-trigger" tabindex="0" aria-expanded="false" aria-controls="proyectos-content"></i>
@@ -529,6 +582,11 @@
         </div>
     </div>
 
+    
+    <button id="btn-volver" class="ui-element">
+        <i class="bi bi-arrow-left"></i> Volver a la órbita
+    </button>
+
     <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
     
     <div id="project-tooltip" role="tooltip" aria-hidden="true">
@@ -544,26 +602,117 @@
     <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}</script>
     <script type="module">
         try {
-            const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending } = await import('three');
+            const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending, CanvasTexture } = await import('three');
+            
+            // Función para crear textura redonda difuminada
+            function createCircleTexture() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 32;
+                canvas.height = 32;
+                const context = canvas.getContext('2d');
+                const gradient = context.createRadialGradient(16, 16, 0, 16, 16, 16);
+                gradient.addColorStop(0, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.2, 'rgba(210,230,255,0.8)');
+                gradient.addColorStop(0.5, 'rgba(100,150,255,0.2)');
+                gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                context.fillStyle = gradient;
+                context.fillRect(0,0,32,32);
+                return new CanvasTexture(canvas);
+            }
+            const circleTexture = createCircleTexture();
+
             const canvas = document.getElementById('bg-canvas');
             const scene = new Scene();
+            // Ligero tinte de color para el fondo espacial
+            scene.background = null; 
+            
             const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 5;
-            const renderer = new WebGLRenderer({ canvas, antialias: window.innerWidth > 768 });
+            const renderer = new WebGLRenderer({ canvas, antialias: window.innerWidth > 768, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-            const particleCount = window.innerWidth <= 768 ? 2000 : 4000;
+            const particleCount = window.innerWidth <= 768 ? 4000 : 10000;
             const positions = new Float32Array(particleCount * 3);
-            for(let i = 0; i < positions.length; i++) positions[i] = (Math.random() - 0.5) * 15;
+            const colors = new Float32Array(particleCount * 3);
+            
+            for(let i = 0; i < positions.length; i++) {
+                positions[i] = (Math.random() - 0.5) * 150;
+            }
+            // Dar un tono ligeramente azulado aleatorio a las estrellas
+            for(let i = 0; i < particleCount; i++) {
+                colors[i*3] = 0.6 + Math.random() * 0.4;     // R
+                colors[i*3+1] = 0.8 + Math.random() * 0.2;   // G
+                colors[i*3+2] = 1.0;                         // B
+            }
+
             const particlesGeometry = new BufferGeometry();
             particlesGeometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
-            const particlesMaterial = new PointsMaterial({ color: 0xcccccc, size: 0.02, sizeAttenuation: true, transparent: true, opacity: 0.6 });
+            particlesGeometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
+            
+            const particlesMaterial = new PointsMaterial({ 
+                size: 0.25, 
+                sizeAttenuation: true, 
+                transparent: true, 
+                opacity: 0.8,
+                map: circleTexture,
+                blending: AdditiveBlending,
+                depthWrite: false,
+                vertexColors: true
+            });
             const backgroundParticles = new Points(particlesGeometry, particlesMaterial);
             scene.add(backgroundParticles);
+            
             const starTriggers = document.querySelectorAll('.star-trigger');
+            const btnVolver = document.getElementById('btn-volver');
             const iconParticleSystems = new Map();
+            
+            // --- NAVEGACIÓN 3D ---
+            const views = {
+                home:      { pos: new Vector3(0, 0, 5),   look: new Vector3(0, 0, 0) },
+                proyectos: { pos: new Vector3(0, -15, 8), look: new Vector3(0, -30, -5) },
+                info:      { pos: new Vector3(-20, 0, 8), look: new Vector3(-40, 0, -5) },
+                contacto:  { pos: new Vector3(20, 0, 8),  look: new Vector3(40, 0, -5) }
+            };
+            
+            let currentView = 'home';
+            const targetCameraPos = new Vector3().copy(views.home.pos);
+            const targetCameraLook = new Vector3().copy(views.home.look);
+            const currentCameraLook = new Vector3().copy(views.home.look);
+            
+            function navigateTo(viewName) {
+                currentView = viewName;
+                const view = views[viewName];
+                targetCameraPos.copy(view.pos);
+                targetCameraLook.copy(view.look);
+                
+                // Hide all panels and active triggers
+                document.querySelectorAll('.content-display').forEach(el => el.classList.remove('active'));
+                
+                if (viewName === 'home') {
+                    btnVolver.classList.remove('visible');
+                    // Show triggers
+                    starTriggers.forEach(el => {
+                        el.classList.remove('hidden', 'active');
+                        const data = iconParticleSystems.get(el);
+                        if(data) data.active = false;
+                    });
+                } else {
+                    // Hide triggers
+                    starTriggers.forEach(el => el.classList.add('hidden'));
+                    // Show target panel with a delay for the camera movement
+                    setTimeout(() => {
+                        if (currentView === viewName) {
+                            document.getElementById(`${viewName}-content`).classList.add('active');
+                            btnVolver.classList.add('visible');
+                        }
+                    }, 600);
+                }
+            }
+
+            btnVolver.addEventListener('click', () => navigateTo('home'));
+
             starTriggers.forEach(trigger => {
-                const particleCount = 10;
+                const particleCount = 15;
                 const positions = new Float32Array(particleCount * 3).fill(0);
                 const velocities = new Float32Array(particleCount * 3);
                 const lifetimes = new Float32Array(particleCount).fill(0);
@@ -572,13 +721,24 @@
                 geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
                 geometry.setAttribute('velocity', new Float32BufferAttribute(velocities, 3));
                 geometry.setAttribute('lifetime', new Float32BufferAttribute(lifetimes, 1));
-                const material = new PointsMaterial({ color: 0xcccccc, size: 0.03, sizeAttenuation: true, transparent: true, opacity: 0.8, blending: AdditiveBlending });
+                const material = new PointsMaterial({ 
+                    color: 0xffffff, 
+                    size: 0.15, 
+                    map: circleTexture,
+                    sizeAttenuation: true, 
+                    transparent: true, 
+                    opacity: 0.9, 
+                    blending: AdditiveBlending,
+                    depthWrite: false
+                });
                 const particleSystem = new Points(geometry, material);
                 particleSystem.visible = false;
                 scene.add(particleSystem);
                 iconParticleSystems.set(trigger, { system: particleSystem, active: false });
             });
+
             function updateIconParticles() {
+                if (currentView !== 'home') return;
                 iconParticleSystems.forEach(({ system, active }, trigger) => {
                     if (!active || !trigger.offsetParent) return;
                     const { position, velocity, lifetime } = system.geometry.attributes;
@@ -601,66 +761,26 @@
                         }
                     }
                     position.needsUpdate = lifetime.needsUpdate = true;
+                    
                     const rect = trigger.getBoundingClientRect();
                     const x = (rect.left + rect.width / 2) / window.innerWidth * 2 - 1;
                     const y = -(rect.top + rect.height / 2) / window.innerHeight * 2 + 1;
+                    
+                    // Simple unproject mapping since we are at home
                     const vector = new Vector3(x, y, 0).unproject(camera);
                     const dir = vector.sub(camera.position).normalize();
                     const distance = -camera.position.z / dir.z;
                     system.position.copy(camera.position.clone().add(dir.multiplyScalar(distance)));
                 });
             }
-            const modalOverlay = document.getElementById('modal-overlay');
-            const modalClose = document.querySelector('.modal-close');
-            const modalBody = document.getElementById('modal-body');
+
             const tooltip = document.getElementById('project-tooltip');
             const tooltipImg = document.getElementById('tooltip-img');
             const tooltipDesc = document.getElementById('tooltip-desc');
             const tooltipDemo = document.getElementById('tooltip-demo');
             const tooltipRepo = document.getElementById('tooltip-repo');
             const isMobile = window.innerWidth <= 768;
-            function closeAll() {
-                document.querySelectorAll('.dropdown').forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                    const trigger = dropdown.querySelector('.star-trigger');
-                    if (trigger) {
-                        trigger.setAttribute('aria-expanded', 'false');
-                        trigger.classList.remove('active');
-                        const data = iconParticleSystems.get(trigger);
-                        if (data) {
-                            data.active = false;
-                            data.system.visible = false;
-                        }
-                    }
-                });
-                modalOverlay.classList.remove('active');
-                tooltip.classList.remove('visible');
-                tooltip.setAttribute('aria-hidden', 'true');
-            }
-            function toggleSection(trigger) {
-                const dropdown = trigger.closest('.dropdown');
-                const contentId = dropdown.dataset.content || trigger.getAttribute('aria-controls');
-                const isActive = dropdown.classList.contains('active');
-                closeAll();
-                if (!isActive) {
-                    dropdown.classList.add('active');
-                    trigger.setAttribute('aria-expanded', 'true');
-                    trigger.classList.add('active');
-                    const data = iconParticleSystems.get(trigger);
-                    if (data) {
-                        data.active = true;
-                        data.system.visible = true;
-                    }
-                    if (isMobile) {
-                        const content = document.getElementById(contentId).innerHTML;
-                        modalBody.innerHTML = content;
-                        modalOverlay.classList.add('active');
-                        document.querySelectorAll('.project-link').forEach(link => {
-                            link.addEventListener('click', handleProjectClick);
-                        });
-                    }
-                }
-            }
+            
             function handleProjectClick(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -674,21 +794,18 @@
                 tooltip.classList.add('visible');
                 tooltip.setAttribute('aria-hidden', 'false');
             }
+
             starTriggers.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleSection(trigger);
+                    const sectionName = trigger.closest('.dropdown').id.replace('-dropdown', '');
+                    navigateTo(sectionName);
                 });
-                trigger.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleSection(trigger);
-                    }
-                });
+                
                 if (!isMobile) {
                     trigger.addEventListener('mouseenter', () => {
-                        if (!trigger.closest('.dropdown').classList.contains('active')) {
+                        if (currentView === 'home') {
                             const data = iconParticleSystems.get(trigger);
                             if (data) {
                                 data.active = data.system.visible = true;
@@ -697,7 +814,7 @@
                         }
                     });
                     trigger.addEventListener('mouseleave', () => {
-                        if (!trigger.closest('.dropdown').classList.contains('active')) {
+                        if (currentView === 'home') {
                             const data = iconParticleSystems.get(trigger);
                             if (data) {
                                 data.active = data.system.visible = false;
@@ -707,46 +824,62 @@
                     });
                 }
             });
-            modalClose?.addEventListener('click', closeAll);
-            modalOverlay?.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) closeAll();
-            });
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.dropdown') && !e.target.closest('#project-tooltip') && !e.target.closest('.modal-content') && !e.target.closest('.star-trigger')) {
-                    closeAll();
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (tooltip.classList.contains('visible')) {
+                        tooltip.classList.remove('visible');
+                    } else if (currentView !== 'home') {
+                        navigateTo('home');
+                    }
                 }
             });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeAll();
-            });
+
             document.querySelectorAll('.project-link').forEach(link => {
                 link.addEventListener('click', handleProjectClick);
-                link.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleProjectClick(e);
-                    }
-                });
             });
+
             document.addEventListener('click', (e) => {
                 if (!tooltip.contains(e.target) && !e.target.closest('.project-link')) {
                     tooltip.classList.remove('visible');
                     tooltip.setAttribute('aria-hidden', 'true');
                 }
+                
+                // Volver a la órbita al hacer clic fuera del panel
+                if (currentView !== 'home') {
+                    const clickedInsidePanel = e.target.closest('.content-display');
+                    const clickedTrigger = e.target.closest('.star-trigger');
+                    const clickedVolverBtn = e.target.closest('#btn-volver');
+                    
+                    if (!clickedInsidePanel && !clickedTrigger && !clickedVolverBtn) {
+                        navigateTo('home');
+                    }
+                }
             });
+
             const mouse = new Vector2();
             window.addEventListener('mousemove', (e) => {
                 mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
             });
+            
             const clock = new Clock();
             function animate() {
                 const elapsedTime = clock.getElapsedTime();
+                // Recuperar la sensación de movimiento espacial constante
                 backgroundParticles.rotation.y = elapsedTime * 0.05;
                 backgroundParticles.rotation.x = elapsedTime * 0.02;
-                camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.02;
-                camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.02;
-                camera.lookAt(scene.position);
+                
+                // Suave movimiento de cámara hacia el objetivo (Lerp)
+                camera.position.lerp(targetCameraPos, 0.04);
+                currentCameraLook.lerp(targetCameraLook, 0.04);
+                
+                // Añadir sutil efecto parallax con el ratón sobre la vista actual
+                const mouseOffset = new Vector3(mouse.x * 0.5, mouse.y * 0.5, 0);
+                const finalLookAt = currentCameraLook.clone().add(mouseOffset);
+                
+                camera.lookAt(finalLookAt);
+                
                 updateIconParticles();
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
