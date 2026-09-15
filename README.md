@@ -1,133 +1,39 @@
-# Aitor Quilez Portafolio
+# Portafolio de Aitor Quilez
 
-Portafolio web interactivo de Aitor Quilez Herrero, desarrollador web especializado en JavaScript y Three.js. Una experiencia visual inmersiva con efectos 3D, partículas animadas y navegación intuitiva.
+Sitio estático con presentación full-stack, proyectos, perfil y contacto en español e inglés. El contenido y los enlaces funcionan sin WebGL; Three.js aporta un fondo opcional.
 
-## ✨ Características Principales
+## Desarrollo
 
-Fondo 3D Interactivo: Sistema de partículas con Three.js que responde al movimiento del mouse
-Efectos de Partículas: Animaciones dinámicas en los iconos interactivos
-Diseño Responsive: Adaptación completa a dispositivos móviles y desktop
-Accesibilidad: Soporte ARIA, navegación por teclado y enfoque visual
-Tooltips Interactivos: Previsualización de proyectos con imágenes y enlaces
-Animaciones Suaves: Transiciones CSS y efectos de Three.js optimizados
-Carga Optimizada: Preloading de fuentes y manejo de errores de imágenes
-
-## 🛠️ Tecnologías Utilizadas
-
-Frontend: HTML5, CSS3, Vanilla JavaScript
-3D: Three.js (versión 0.157.0)
-UI: Bootstrap Icons, Google Fonts (Space Mono)
-Herramientas: Popper.js para tooltips
-Optimización: Lazy loading, throttling de renderizado
-
-```text
-📁 Estructura del Proyecto
-text├── index.html          # Archivo principal
-├── Resources/
-│   ├── favicon.png     # Icono del sitio
-│   ├── Aitor.jpg       # Foto personal
-│   ├── Arete.png       # Imágenes de proyectos
-│   ├── Street_Figther.png
-│   ├── Breaking_Bad_Table.png
-│   ├── eSports.png
-│   ├── Puzzle.png
-│   ├── Lista_Compra.png
-│   ├── Docker.png
-│   ├── Python.png
-│   └── CV_QHA.pdf      # Currículum vitae
+```sh
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
+Abrir http://127.0.0.1:4173. No requiere instalación ni compilación.
 
-## 🎮 Interactividad
-Navegación
+## Estructura
 
-- Iconos Principales: Clic o hover para expandir secciones (Proyectos, Info, Contacto)
-- Proyectos: Clic en cualquier proyecto muestra tooltip con demo y código fuente
-- Teclado: Navegación completa con Enter/Espacio y Escape para cerrar
+- `index.html`: contenido, proyectos y metadatos.
+- `assets/styles.css`: estilos y adaptación móvil.
+- `assets/i18n.js`: traducciones y selección del CV ES/EN.
+- `assets/app.js`: detalles de proyectos en un diálogo nativo con Escape y retorno del foco.
+- `assets/background.js`: fondo opcional, limitado a unos 30 fps y detenido con movimiento reducido o pestaña oculta.
+- `Resources/`: imágenes y PDF.
 
-Efectos Visuales
+Las tarjetas mantienen enlaces directos. El botón adicional de detalles se añade con JavaScript. Para editar un proyecto, modificar su tarjeta y los atributos `data-*` en el HTML.
 
-- Partículas de Fondo: 4000 partículas rotando y siguiendo el mouse
-- Efectos en Iconos: Sistema de partículas activado al hover/focus
-- Tooltips Dinámicos: Posicionamiento inteligente con Popper.js
-- Loading Spinner: Indicador de carga inicial
+## Docker
 
-## 📱 Responsive Design
+```sh
+docker build -t portafolio .
+docker run --rm -p 8080:80 portafolio
+```
 
-Mobile First: Optimizado para pantallas ≤768px  
-Breakpoints:
+La imagen copia únicamente el HTML, assets y recursos publicados. Los scripts auxiliares y CV anteriores quedan fuera. CSS y JS se revalidan porque sus nombres no llevan hash.
 
-480px: Ajustes para pantallas muy pequeñas  
-768px: Layout móvil completo  
-1440px+: Contenidos más amplios  
+## Validación y contenido pendiente
 
+Se revisaron la portada en escritorio y móvil, cambio ES/EN, selección de CV y diálogo con Escape y retorno del foco. JavaScript validado con `node --check`.
 
-Performance: Renderizado throttled a 30fps en móviles
+Las descripciones y tecnologías de proyectos proceden de la versión anterior: falta contrastarlas con cada producto y redactar casos de estudio con responsabilidades y resultados confirmados. Revisar el contenido de los PDF antes de publicar. La URL canónica sigue siendo la de GitHub Pages.
 
-## ♿ Accesibilidad
-
-ARIA Labels: Atributos semánticos en todos los elementos interactivos  
-Navegación por Teclado: Focus management y activación con Enter/Espacio  
-Reduced Motion: Respeto a preferencias del sistema operativo  
-Contraste: Colores optimizados para legibilidad  
-Screen Reader: Estructura semántica y descripciones  
-
-## 🔧 Personalización
-Variables CSS  
-css:root {
-    --dark-grey: #1a1a1a;    /* Fondo principal */  
-    --light-grey: #f0f0f0;   /* Texto principal */  
-    --mid-grey: #888;        /* Texto secundario */  
-    --dark-grey-border: #444; /* Bordes */  
-}  
-
-Configuración Three.js
-
-particleCount: Número de partículas de fondo (4000 por defecto)  
-frameInterval: FPS objetivo (30fps)  
-sizeAttenuation: Escala de partículas según distancia  
-
-## 📋 Proyectos Mostrados
-Studies Projects
-
-. Arete Dance: Web moderna para academia de baile  
-. Street Fighter: Recreación de pantalla de selección  
-. Breaking Bad API: Consumo de API oficial  
-. Tournament eSports UML: Sistema de gestión de torneos  
-
-Own Projects
-
-. Brain Puzzle: Rompecabezas matemático
-. Shopping_list: App lista de la compra
-. DockerApp: Sitio estático con Docker
-. DockerApp 2.0: Con backend Flask
-. Script_Files: Organizador de descargas
-
-## 🐛 Solución de Problemas
-Canvas no se renderiza
-
-Verificar WebGL support en el navegador  
-Comprobar conexión a CDN de Three.js  
-Revisar console para errores de import  
-
-Imágenes no cargan
-
-Verificar ruta ./Resources/  
-Comprobar onerror fallback de imágenes  
-Usar servidor local para evitar CORS  
-
-Performance baja
-
-Reducir particleCount en dispositivos móviles
-Desactivar antialias en móviles
-Usar prefers-reduced-motion
-
-## 📄 Licencia
-Proyecto personal - © 2025 Aitor Quilez Herrero (Thorqui)  
-
-##🤝 Contacto
-Email: aitorquilez@gmail.com  
-GitHub: Thorqui  
-LinkedIn: Aitor Quilez  
-
-
+Los scripts `update_portfolio.py` y `update_particles.py` son históricos y no deben ejecutarse sobre esta versión.
