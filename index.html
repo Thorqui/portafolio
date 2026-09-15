@@ -5,11 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aitor Quilez | Portafolio</title>
     <meta name="description" content="Portafolio de Aitor Quilez - Desarrollador web especializado en JavaScript y Three.js">
+    <meta name="author" content="Aitor Quilez Herrero">
+    <meta name="theme-color" content="#1a1a1a">
+    <link rel="canonical" href="https://thorqui.github.io/portafolio/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aitor Quilez">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://thorqui.github.io/portafolio/">
+    <meta property="og:title" content="Aitor Quilez | Portafolio">
+    <meta property="og:description" content="Desarrollo de Aplicaciones Multiplataforma. Proyectos con JavaScript, Three.js, Python y Docker.">
+    <meta property="og:image" content="https://thorqui.github.io/portafolio/Resources/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Portafolio de Aitor Quilez Herrero">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aitor Quilez | Portafolio">
+    <meta name="twitter:description" content="Desarrollo de Aplicaciones Multiplataforma. Proyectos con JavaScript, Three.js, Python y Docker.">
+    <meta name="twitter:image" content="https://thorqui.github.io/portafolio/Resources/og-image.png">
     <link rel="icon" type="image/png" href="Resources/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aitor Quilez Herrero",
+        "jobTitle": "Desarrollador Full-Stack",
+        "url": "https://thorqui.github.io/portafolio/",
+        "image": "https://thorqui.github.io/portafolio/Resources/Aitor.webp",
+        "email": "mailto:aitorquilez@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Zaragoza",
+            "addressCountry": "ES"
+        },
+        "sameAs": [
+            "https://github.com/Thorqui",
+            "https://www.linkedin.com/in/aitor-quilez-817324365/"
+        ],
+        "knowsLanguage": ["es", "en"],
+        "knowsAbout": [
+            "React", "Next.js", "TypeScript", "JavaScript",
+            "Python", "Django", "FastAPI", "C#", ".NET Core",
+            "PostgreSQL", "Docker", "CI/CD", "Kotlin", "Jetpack Compose",
+            "Three.js", "Integración de LLM"
+        ]
+    }
+    </script>
     <style>
         :root {
             --dark-grey: #1a1a1a;
@@ -34,6 +78,7 @@
             height: 100%;
             z-index: -1;
             background-color: var(--dark-grey);
+            background-image: radial-gradient(ellipse 120% 85% at 50% 38%, #212736 0%, #1b1d26 45%, var(--dark-grey) 80%);
         }
 
         #loading-spinner {
@@ -74,13 +119,68 @@
             padding: 3vw;
         }
 
+        /* Selector de idioma ---------------------------------------- */
+        .lang-switch {
+            position: fixed;
+            top: 2%;
+            right: 4%;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 0.4rem 0.55rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--mid-grey);
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .lang-btn:hover,
+        .lang-btn:focus-visible {
+            color: var(--light-grey);
+            border-color: rgba(255, 255, 255, 0.18);
+            outline: none;
+        }
+
+        .lang-btn[aria-pressed="true"] {
+            color: var(--light-grey);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+
+        .lang-sep {
+            color: var(--mid-grey);
+            opacity: 0.35;
+            font-size: 0.7rem;
+        }
+
         .star-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
             font-size: clamp(1.5rem, 4vw, 2rem);
             color: var(--mid-grey);
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
-            display: inline-block;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .star-trigger:hover, .star-trigger.active {
@@ -94,72 +194,16 @@
             to { transform: scale(1.2) rotate(15deg); }
         }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .content-display {
-            background: rgba(26, 26, 26, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 2.5rem;
-            max-width: 90vw;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--mid-grey);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1001;
-        }
-
-        .modal-close:hover {
-            color: var(--light-grey);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         .content-display {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -40%) scale(0.9);
+            box-sizing: border-box;
             width: min(90vw, 800px);
+            max-width: 94vw;
             max-height: 80vh;
+            max-height: 80dvh;
             overflow-y: auto;
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             padding: 2rem;
@@ -181,79 +225,207 @@
             pointer-events: auto;
             transform: translate(-50%, -50%) scale(1);
         }
-        
-        .dropdown {
-            position: fixed;
-            z-index: 100;
-            padding: 3vw;
-        }
 
-        #btn-volver {
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--light-grey);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            font-size: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        
 
-        #btn-volver:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-50%) scale(1.05);
-        }
-        
-        #btn-volver.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .star-trigger {
-            transition: all 0.5s ease;
-        }
         .star-trigger.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-
-        #proyectos {
+        /* Tarjetas de proyecto -------------------------------------- */
+        .project-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
             gap: 1rem;
-            justify-content: center;
         }
 
-        .subsection {
+        .project-card {
             display: flex;
             flex-direction: column;
+            text-decoration: none;
+            color: var(--mid-grey);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border-color 0.45s ease,
+                        box-shadow 0.45s ease,
+                        background 0.45s ease,
+                        color 0.45s ease;
         }
 
-        .subsection h3 {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            margin-bottom: 1rem;
+        .project-card:hover,
+        .project-card:focus-visible,
+        .project-card.active {
             color: var(--light-grey);
-            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.28);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+            outline: none;
+        }
+
+        .card-thumb {
+            position: relative;
+            display: block;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: #131313;
+        }
+
+        .card-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* En reposo el sitio es monocromo; el color llega con el hover */
+            filter: grayscale(1) brightness(0.72) contrast(0.95);
+            opacity: 0.8;
+            transition: filter 0.55s ease, opacity 0.55s ease,
+                        transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .project-card:hover .card-thumb img,
+        .project-card:focus-visible .card-thumb img,
+        .project-card.active .card-thumb img {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.07);
+        }
+
+        .card-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 15, 15, 0.75), transparent 55%);
+            pointer-events: none;
+        }
+
+        .card-hint {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            z-index: 1;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--light-grey);
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .project-card:hover .card-hint,
+        .project-card:focus-visible .card-hint {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            padding: 0.85rem 0.9rem 1rem;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--light-grey);
+            line-height: 1.25;
+        }
+
+        .card-year {
+            flex-shrink: 0;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            color: var(--mid-grey);
+            opacity: 0.7;
+        }
+
+        .card-desc {
+            font-size: 0.7rem;
+            line-height: 1.5;
+            opacity: 0.75;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.15rem;
+        }
+
+        .tech-tag {
+            font-size: 0.56rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.22rem 0.45rem;
+            color: var(--mid-grey);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+            transition: border-color 0.45s ease, color 0.45s ease;
+        }
+
+        .project-card:hover .tech-tag {
+            color: var(--light-grey);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        #proyectos-content {
+            width: min(94vw, 1080px);
+            max-height: 66vh;
+            max-height: 66dvh;
+        }
+
+        /* Barra de scroll discreta dentro de los paneles de cristal */
+        .content-display {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        }
+
+        .content-display::-webkit-scrollbar { width: 8px; }
+        .content-display::-webkit-scrollbar-track { background: transparent; }
+        .content-display::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        .content-display::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.28);
         }
 
         #proyectos-dropdown {
             top: 80%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .star-trigger {
+            pointer-events: auto;
         }
 
         #info-dropdown {
@@ -266,6 +438,38 @@
             right: 10%;
         }
 
+        #stack {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            text-align: left;
+        }
+
+        .stack-group {
+            display: grid;
+            grid-template-columns: 5.5rem 1fr;
+            align-items: start;
+            gap: 0.6rem;
+        }
+
+        .stack-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mid-grey);
+            padding-top: 0.25rem;
+        }
+
+        .stack-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
         #info-img {
             width: 80px;
             height: 80px;
@@ -273,43 +477,6 @@
             object-fit: cover;
             opacity: 0.8;
             margin-bottom: 1rem;
-        }
-
-        .project-link {
-            display: block;
-            color: var(--mid-grey);
-            text-decoration: none;
-            margin-bottom: 0.75rem;
-            padding: 0.75rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-link::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-20deg);
-            transition: all 0.5s ease;
-        }
-
-        .project-link:hover::before {
-            left: 150%;
-        }
-
-        .project-link:hover, .project-link.active {
-            color: var(--light-grey);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .footer {
@@ -331,9 +498,10 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
-            padding: 1.5rem;
-            width: min(80vw, 320px);
-            max-height: 70vh;
+            padding: 1.25rem;
+            width: min(88vw, 400px);
+            max-height: 72vh;
+            max-height: 72dvh;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
@@ -355,12 +523,52 @@
             pointer-events: auto;
         }
 
+        #tooltip-close {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            font-size: 0.85rem;
+            color: var(--light-grey);
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tooltip-close:hover,
+        #tooltip-close:focus-visible {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+        }
+
         #project-tooltip img {
             width: 100%;
-            height: 150px;
+            height: 190px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-bottom: 1rem;
+        }
+
+        #tooltip-title {
+            margin: 0 0 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--light-grey);
+        }
+
+        #tooltip-desc {
+            margin: 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--mid-grey);
         }
 
         .tooltip-buttons {
@@ -371,6 +579,10 @@
         }
 
         .tooltip-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
             color: var(--light-grey);
             background: rgba(255, 255, 255, 0.1);
             padding: 0.5rem 1rem;
@@ -397,10 +609,17 @@
         }
 
         .contact-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
             color: var(--mid-grey);
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 1.5rem;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .contact-icon:hover {
@@ -427,10 +646,69 @@
             display: block;
         }
 
-        .project-icon {
-            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
-            color: var(--mid-grey);
-            margin-right: 0.5rem;
+        /* Secuencia de entrada -------------------------------------
+           Se aplica solo mientras body tiene .intro; el JS la retira al
+           terminar para no bloquear los transform de :hover.            */
+        @keyframes intro-name {
+            from { opacity: 0; transform: translateY(-16px); filter: blur(5px); }
+            to   { opacity: 0.6; transform: none; filter: none; }
+        }
+
+        @keyframes intro-star {
+            from { opacity: 0; transform: scale(0.2); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes intro-fade {
+            from { opacity: 0; }
+            to   { opacity: 0.5; }
+        }
+
+        body.intro .top-left-name {
+            animation: intro-name 1.2s 1.1s backwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        body.intro .star-trigger {
+            animation: intro-star 0.9s backwards cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body.intro #info-dropdown .star-trigger      { animation-delay: 1.55s; }
+        body.intro #proyectos-dropdown .star-trigger { animation-delay: 1.7s; }
+        body.intro #contacto-dropdown .star-trigger  { animation-delay: 1.85s; }
+
+        body.intro .lang-switch {
+            animation: intro-fade-full 1s 1.35s backwards ease-out;
+        }
+
+        @keyframes intro-fade-full {
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        body.intro .footer {
+            animation: intro-fade 1.2s 2.1s backwards ease-out;
+        }
+
+        /* En tactil no existe :hover, asi que lo que solo se revelaba al
+           pasar el raton tiene que estar visible de entrada.            */
+        @media (hover: none) {
+            .card-hint {
+                opacity: 0.85;
+                transform: scale(1);
+            }
+
+            .cv-tooltip {
+                display: block;
+                bottom: auto;
+                top: 100%;
+                margin-top: 0.15rem;
+                font-size: 0.6rem;
+            }
+
+            .card-thumb img {
+                filter: grayscale(1) brightness(0.8) contrast(0.95);
+                opacity: 0.9;
+            }
         }
 
         @media (max-width: 768px) {
@@ -440,8 +718,22 @@
                 font-size: clamp(1rem, 4vw, 1.3rem);
             }
 
+            .lang-switch {
+                top: 1.5%;
+                right: 2%;
+            }
+
+            #project-tooltip {
+                width: 94vw;
+                bottom: 2%;
+            }
+
+            #project-tooltip img {
+                height: 150px;
+            }
+
             #info-dropdown { top: 20%; left: 5%; }
-            #proyectos-dropdown { top: 75%; left: 50%; transform: translate(-50%, -50%); }
+            #proyectos-dropdown { top: 75%; }
             #contacto-dropdown { top: 20%; right: 5%; }
 
             .star-trigger {
@@ -450,27 +742,24 @@
 
             
 
-            .content-display h3 {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-                color: var(--light-grey);
-                border-bottom: 1px solid var(--dark-grey-border);
-                padding-bottom: 0.5rem;
+            #proyectos-content {
+                padding: 1.1rem;
+                max-height: 72vh;
             }
 
-            .content-display #proyectos {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
+            .project-grid {
+                grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+                gap: 0.7rem;
             }
 
-            .content-display .project-link {
-                padding: 1rem;
-                font-size: 1rem;
-                margin-bottom: 0;
-                background: rgba(255, 255, 255, 0.1);
+            .card-body {
+                gap: 0.35rem;
+                padding: 0.6rem 0.65rem 0.75rem;
             }
+
+            .card-title { font-size: 0.75rem; }
+            .card-desc  { font-size: 0.62rem; -webkit-line-clamp: 3; }
+            .tech-tag   { font-size: 0.5rem; padding: 0.18rem 0.35rem; }
 
             .content-display #info {
                 display: flex;
@@ -483,6 +772,11 @@
             .content-display #info-img {
                 width: 80px;
                 height: 80px;
+            }
+
+            .stack-group {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
             }
 
             .content-display #info p {
@@ -501,56 +795,214 @@
             }
         }
 
+        /* Movil en horizontal: el alto util es minimo */
+        @media (max-width: 950px) and (orientation: landscape) {
+            /* El nombre se compacta para que el panel no lo tape */
+            .top-left-name {
+                top: 0;
+                left: 2%;
+                padding: 0.4rem 0;
+                font-size: 0.85rem;
+            }
+
+            #proyectos-content {
+                max-height: 76vh;
+                max-height: 76dvh;
+                padding: 0.9rem;
+            }
+
+            .card-thumb { aspect-ratio: 16 / 9; }
+            .card-desc { -webkit-line-clamp: 2; }
+
+            #project-tooltip {
+                width: min(92vw, 460px);
+                max-height: 92vh;
+                max-height: 92dvh;
+                bottom: 2%;
+            }
+
+            #project-tooltip img { height: 110px; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
+                animation-delay: 0ms !important;
                 transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
-<body>
+<body class="intro">
     <div id="loading-spinner"></div>
     <canvas id="bg-canvas"></canvas>
     <header class="ui-element top-left-name">Aitor Quilez Herrero</header>
+
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+        <button type="button" class="lang-btn" data-lang="es" aria-pressed="true" lang="es">ES</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
     
 
-
     <div class="dropdown" id="proyectos-dropdown" role="region" data-content="proyectos-content">
-        <i class="bi bi-code-slash star-trigger" tabindex="0" aria-expanded="false" aria-controls="proyectos-content"></i>
+        <i class="bi bi-code-slash star-trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="proyectos-content" data-i18n-aria="a11y.openProjects"></i>
         <div class="content-display" id="proyectos-content">
             <section id="proyectos">
-                <div class="subsection">
-                    <h3>Projects Studies</h3>
-                    <a href="#" class="project-link" data-img="./Resources/Arete.png" data-description="Una web moderna para una academia de baile." data-demo="https://thorqui.github.io/AreteDance/" data-repo="https://github.com/thorqui/AreteDance" aria-label="Ver proyecto Arete Dance">
-                        <i class="bi bi-dash project-icon"></i>Arete Dance
+                <div class="project-grid">
+                    <a href="https://blothor.com" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Blothor.webp" data-title="Blothor" data-desc-es="Central de proyectos digitales: software a medida con interfaces cuidadas al detalle." data-desc-en="Digital product hub: custom software with carefully crafted interfaces." data-demo="https://blothor.com" data-repo="">
+                        <span class="card-thumb">
+                            <img src="./Resources/Blothor.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Blothor</span>
+                                <span class="card-year">2026</span>
+                            </span>
+                            <span class="card-desc">Central de proyectos digitales: software a medida con interfaces cuidadas al detalle.</span>
+                            <span class="card-tech"><span class="tech-tag">Vite</span><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS</span><span class="tech-tag">Nginx</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Street_Figther.png" data-description="Recreación de la pantalla de selección de luchadores." data-demo="https://thorqui.github.io/QHA_LLMM_2Trim/" data-repo="https://github.com/thorqui/QHA_LLMM_2Trim" aria-label="Ver proyecto Street Fighter">
-                        <i class="bi bi-dash project-icon"></i>Street Fighter
+                    <a href="https://dev.blothor.com" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Control_Clases.webp" data-title="Control de Clases" data-desc-es="Reservas automatizadas para academias: saldo de vales y lista de espera que se reparte sola." data-desc-en="Automated bookings for academies: voucher balances and a self-managing waiting list." data-demo="https://dev.blothor.com" data-repo="">
+                        <span class="card-thumb">
+                            <img src="./Resources/Control_Clases.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Control de Clases</span>
+                                <span class="card-year">2026</span>
+                            </span>
+                            <span class="card-desc">Reservas automatizadas para academias: saldo de vales y lista de espera que se reparte sola.</span>
+                            <span class="card-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Breaking_Bad_Table.png" data-description="Aplicación que consume y muestra datos de la API de Breaking Bad." data-demo="https://thorqui.github.io/Activ_2_LLMM_BreakingBad/" data-repo="https://github.com/thorqui/Activ_2_LLMM_BreakingBad" aria-label="Ver proyecto Breaking Bad API">
-                        <i class="bi bi-dash project-icon"></i>Breaking Bad API
+                    <a href="https://thorqui.github.io/AreteDance/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Arete.webp" data-title="Arete Dance" data-desc-es="Una web moderna para una academia de baile." data-desc-en="A modern website for a dance academy." data-demo="https://thorqui.github.io/AreteDance/" data-repo="https://github.com/Thorqui/AreteDance">
+                        <span class="card-thumb">
+                            <img src="./Resources/Arete.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Arete Dance</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Una web moderna para una academia de baile.</span>
+                            <span class="card-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JS</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/eSports.png" data-description="Sistema de Gestión de Torneos de eSports" data-demo="" data-repo="https://github.com/Thorqui/torneo-esports-uml" aria-label="Ver proyecto Torneo eSports UML">
-                        <i class="bi bi-dash project-icon"></i>Tournament eSports UML
+                    <a href="https://thorqui.github.io/QHA_LLMM_2Trim/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Street_Figther.webp" data-title="Street Fighter" data-desc-es="Recreación de la pantalla de selección de luchadores." data-desc-en="Recreation of the fighter selection screen." data-demo="https://thorqui.github.io/QHA_LLMM_2Trim/" data-repo="https://github.com/Thorqui/QHA_LLMM_2Trim">
+                        <span class="card-thumb">
+                            <img src="./Resources/Street_Figther.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Street Fighter</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Recreación de la pantalla de selección de luchadores.</span>
+                            <span class="card-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JS</span></span>
+                        </span>
                     </a>
-                </div>
-                <div class="subsection">
-                    <h3>Own Projects</h3>
-                    <a href="#" class="project-link" data-img="./Resources/Puzzle.png" data-description="Rompecabezas matemático" data-demo="https://thorqui.github.io/Brain_Puzzle/" data-repo="https://github.com/Thorqui/Brain_Puzzle" aria-label="Ver proyecto Brain Puzzle">
-                        <i class="bi bi-dash project-icon"></i>Brain Puzzle
+                    <a href="https://thorqui.github.io/Activ_2_LLMM_BreakingBad/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Breaking_Bad_Table.webp" data-title="Breaking Bad API" data-desc-es="Aplicación que consume y muestra datos de la API de Breaking Bad." data-desc-en="App that consumes and displays data from the Breaking Bad API." data-demo="https://thorqui.github.io/Activ_2_LLMM_BreakingBad/" data-repo="https://github.com/Thorqui/Activ_2_LLMM_BreakingBad">
+                        <span class="card-thumb">
+                            <img src="./Resources/Breaking_Bad_Table.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Breaking Bad API</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Aplicación que consume y muestra datos de la API de Breaking Bad.</span>
+                            <span class="card-tech"><span class="tech-tag">JS</span><span class="tech-tag">Fetch API</span><span class="tech-tag">CSS</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Lista_Compra.png" data-description="App lista de la compra online" data-demo="https://thorqui.github.io/Shopping_list/" data-repo="https://github.com/Thorqui/Shopping_list" aria-label="Ver Proyecto Shopping_list">
-                        <i class="bi bi-dash project-icon"></i>Shopping_list
+                    <a href="https://github.com/Thorqui/torneo-esports-uml" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/eSports.webp" data-title="Tournament eSports UML" data-desc-es="Sistema de gestión de torneos de eSports." data-desc-en="eSports tournament management system." data-demo="" data-repo="https://github.com/Thorqui/torneo-esports-uml">
+                        <span class="card-thumb">
+                            <img src="./Resources/eSports.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Tournament eSports UML</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Sistema de gestión de torneos de eSports.</span>
+                            <span class="card-tech"><span class="tech-tag">UML</span><span class="tech-tag">Java</span><span class="tech-tag">POO</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Docker.png" data-description="Sitio Web Estático con Docker" data-demo="" data-repo="https://github.com/Thorqui/DockerApp" aria-label="Ver Proyecto DockerApp">
-                        <i class="bi bi-dash project-icon"></i>DockerApp
+                    <a href="https://thorqui.github.io/Brain_Puzzle/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Puzzle.webp" data-title="Brain Puzzle" data-desc-es="Rompecabezas matemático." data-desc-en="Mathematical puzzle game." data-demo="https://thorqui.github.io/Brain_Puzzle/" data-repo="https://github.com/Thorqui/Brain_Puzzle">
+                        <span class="card-thumb">
+                            <img src="./Resources/Puzzle.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Brain Puzzle</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Rompecabezas matemático.</span>
+                            <span class="card-tech"><span class="tech-tag">JS</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Docker.png" data-description="Sitio Web Estático con Backend Flask" data-demo="" data-repo="https://github.com/Thorqui/DockerApp_2.0" aria-label="Ver Proyecto DockerApp_2.0">
-                        <i class="bi bi-dash project-icon"></i>DockerApp_2.0
+                    <a href="https://thorqui.github.io/Shopping_list/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Lista_Compra.webp" data-title="Shopping_list" data-desc-es="App de lista de la compra online." data-desc-en="Online shopping list app." data-demo="https://thorqui.github.io/Shopping_list/" data-repo="https://github.com/Thorqui/Shopping_list">
+                        <span class="card-thumb">
+                            <img src="./Resources/Lista_Compra.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Shopping_list</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">App de lista de la compra online.</span>
+                            <span class="card-tech"><span class="tech-tag">JS</span><span class="tech-tag">LocalStorage</span><span class="tech-tag">CSS</span></span>
+                        </span>
                     </a>
-                    <a href="#" class="project-link" data-img="./Resources/Python.png" data-description="Organizador de Descargas y Carpetas .exe" data-demo="" data-repo="https://github.com/Thorqui/Script_Files" aria-label="Ver Proyecto Script_Files">
-                        <i class="bi bi-dash project-icon"></i>Script_Files
+                    <a href="https://github.com/Thorqui/DockerApp" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Docker.webp" data-title="DockerApp" data-desc-es="Sitio web estático con Docker." data-desc-en="Static website with Docker." data-demo="" data-repo="https://github.com/Thorqui/DockerApp">
+                        <span class="card-thumb">
+                            <img src="./Resources/Docker.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">DockerApp</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Sitio web estático con Docker.</span>
+                            <span class="card-tech"><span class="tech-tag">Docker</span><span class="tech-tag">Nginx</span><span class="tech-tag">HTML</span></span>
+                        </span>
+                    </a>
+                    <a href="https://github.com/Thorqui/DockerApp_2.0" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Docker.webp" data-title="DockerApp_2.0" data-desc-es="Sitio web estático con backend Flask." data-desc-en="Static website with a Flask backend." data-demo="" data-repo="https://github.com/Thorqui/DockerApp_2.0">
+                        <span class="card-thumb">
+                            <img src="./Resources/Docker.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">DockerApp_2.0</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Sitio web estático con backend Flask.</span>
+                            <span class="card-tech"><span class="tech-tag">Docker</span><span class="tech-tag">Flask</span><span class="tech-tag">Python</span></span>
+                        </span>
+                    </a>
+                    <a href="https://github.com/Thorqui/Script_Files" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Python.webp" data-title="Script_Files" data-desc-es="Organizador de descargas y carpetas en .exe" data-desc-en="Downloads and folders organizer (.exe)." data-demo="" data-repo="https://github.com/Thorqui/Script_Files">
+                        <span class="card-thumb">
+                            <img src="./Resources/Python.webp" alt="" loading="lazy" decoding="async">
+                            <span class="card-hint" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span>
+                        </span>
+                        <span class="card-body">
+                            <span class="card-head">
+                                <span class="card-title">Script_Files</span>
+                                <span class="card-year">2025</span>
+                            </span>
+                            <span class="card-desc">Organizador de descargas y carpetas en .exe</span>
+                            <span class="card-tech"><span class="tech-tag">Python</span><span class="tech-tag">Automation</span><span class="tech-tag">EXE</span></span>
+                        </span>
                     </a>
                 </div>
             </section>
@@ -558,51 +1010,185 @@
     </div>
 
     <div class="dropdown" id="info-dropdown" role="region" data-content="info-content">
-        <i class="bi bi-person star-trigger" tabindex="0" aria-expanded="false" aria-controls="info-content"></i>
+        <i class="bi bi-person star-trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="info-content" data-i18n-aria="a11y.openAbout"></i>
         <div class="content-display" id="info-content">
             <section id="info">
-                <img id="info-img" src="Resources/Aitor.jpg" alt="Foto de Aitor Quilez">
-                <p>Technology enthusiast transitioning from the chemical industry to software development, combining 15+ years of professional experience with newly acquired technical skills. <strong>Currently completing official training in Multiplatform Application Development (DAM) and self-learning emerging technologies.</strong> Seeking a challenging role in a dynamic tech environment where I can apply my project management, teamwork, and communication expertise, contribute with innovative solutions, and grow as a software professional.</p>
+                <img id="info-img" src="Resources/Aitor.webp" alt="Aitor Quilez" data-i18n-alt="a11y.photo" width="80" height="80" decoding="async">
+                <p data-i18n-html="about.bio">Technology enthusiast transitioning from the chemical industry to software development, combining 15+ years of professional experience with newly acquired technical skills. <strong>Currently completing official training in Multiplatform Application Development (DAM) and self-learning emerging technologies.</strong> Seeking a challenging role in a dynamic tech environment where I can apply my project management, teamwork, and communication expertise, contribute with innovative solutions, and grow as a software professional.</p>
+                <div id="stack">
+                    <div class="stack-group">
+                        <span class="stack-label">Frontend</span>
+                        <span class="stack-tags"><span class="tech-tag">React</span><span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span></span>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-label">Backend</span>
+                        <span class="stack-tags"><span class="tech-tag">Python</span><span class="tech-tag">Django</span><span class="tech-tag">FastAPI</span><span class="tech-tag">C#</span><span class="tech-tag">.NET Core</span></span>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-label" data-i18n="stack.data">Datos</span>
+                        <span class="stack-tags"><span class="tech-tag">PostgreSQL</span><span class="tech-tag">MySQL</span><span class="tech-tag">Supabase</span><span class="tech-tag">SQL</span></span>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-label">DevOps</span>
+                        <span class="stack-tags"><span class="tech-tag">Docker</span><span class="tech-tag">Git</span><span class="tech-tag">GitHub Actions</span><span class="tech-tag">CI/CD</span><span class="tech-tag">Linux</span></span>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-label">IA / LLM</span>
+                        <span class="stack-tags"><span class="tech-tag">Claude API</span><span class="tech-tag">Prompt Engineering</span><span class="tech-tag" data-i18n="stack.agents">Agentes autónomos</span></span>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-label" data-i18n="stack.mobile">Móvil</span>
+                        <span class="stack-tags"><span class="tech-tag">Kotlin</span><span class="tech-tag">Jetpack Compose</span><span class="tech-tag">MVVM</span></span>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
 
     <div class="dropdown" id="contacto-dropdown" role="region" data-content="contacto-content">
-        <i class="bi bi-envelope star-trigger" tabindex="0" aria-expanded="false" aria-controls="contacto-content"></i>
+        <i class="bi bi-envelope star-trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="contacto-content" data-i18n-aria="a11y.openContact"></i>
         <div class="content-display" id="contacto-content">
             <section id="contacto">
-                <p>Open to opportunities</p>
+                <p data-i18n="contact.open">Abierto a oportunidades</p>
                 <div class="contact-links">
-                    <a href="mailto:aitorquilez@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Enviar correo a Aitor Quilez"><i class="bi bi-envelope"></i></a>
-                    <a href="Resources/CV_QHA.pdf" download="Curriculum_Aitor_Quilez.pdf" class="contact-icon" aria-label="Descargar currículum de Aitor Quilez"><i class="bi bi-file-earmark-text"></i><span class="cv-tooltip">CV (PDF)</span></a>
-                    <a href="https://www.linkedin.com/in/aitor-quilez-817324365/" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="https://github.com/Thorqui" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de GitHub"><i class="bi bi-github"></i></a>
+                    <a href="mailto:aitorquilez@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Enviar correo a Aitor Quilez" data-i18n-aria="a11y.email"><i class="bi bi-envelope"></i></a>
+                    <a href="Resources/CV_QHA.pdf" download="Curriculum_Aitor_Quilez.pdf" class="contact-icon" aria-label="Descargar currículum de Aitor Quilez" data-i18n-aria="a11y.cv"><i class="bi bi-file-earmark-text"></i><span class="cv-tooltip" data-i18n="contact.cv">CV (PDF)</span></a>
+                    <a href="https://www.linkedin.com/in/aitor-quilez-817324365/" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de LinkedIn" data-i18n-aria="a11y.linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/Thorqui" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="Perfil de GitHub" data-i18n-aria="a11y.github"><i class="bi bi-github"></i></a>
                 </div>
             </section>
         </div>
     </div>
 
     
-    <button id="btn-volver" class="ui-element">
-        <i class="bi bi-arrow-left"></i> Volver a la órbita
-    </button>
-
-    <footer class="ui-element footer">&copy; 2025 // Thorqui</footer>
+    <footer class="ui-element footer">&copy; 2026 // Thorqui</footer>
     
-    <div id="project-tooltip" role="tooltip" aria-hidden="true">
-        <img id="tooltip-img" src="" alt="Vista previa del proyecto" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Vista+previa+no+disponible';">
+    <div id="project-tooltip" role="dialog" aria-modal="false" aria-labelledby="tooltip-title" aria-hidden="true">
+        <button type="button" id="tooltip-close" aria-label="Cerrar" data-i18n-aria="a11y.close"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+        <img id="tooltip-img" src="" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';">
+        <h4 id="tooltip-title"></h4>
         <p id="tooltip-desc"></p>
         <div class="tooltip-buttons">
-            <a id="tooltip-demo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Demo</a>
-            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer">Ver Código</a>
+            <a id="tooltip-demo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer" data-i18n="proj.demo">Ver Demo</a>
+            <a id="tooltip-repo" class="tooltip-button" href="#" target="_blank" rel="noopener noreferrer" data-i18n="proj.code">Ver Código</a>
         </div>
     </div>
+
+    <script>
+        (function () {
+            const DICT = {
+                es: {
+                    'meta.title': 'Aitor Quilez | Portafolio',
+                    'stack.data': 'Datos',
+                    'stack.mobile': 'Móvil',
+                    'stack.agents': 'Agentes autónomos',
+                    'about.bio': 'Entusiasta de la tecnología en transición desde la industria química al desarrollo de software, combinando más de 15 años de experiencia profesional con competencias técnicas recién adquiridas. <strong>Actualmente cursando el ciclo oficial de Desarrollo de Aplicaciones Multiplataforma (DAM) y formándome por mi cuenta en tecnologías emergentes.</strong> Busco un puesto exigente en un entorno tecnológico dinámico donde aplicar mi experiencia en gestión de proyectos, trabajo en equipo y comunicación, aportar soluciones innovadoras y crecer como profesional del software.',
+                    'contact.open': 'Abierto a oportunidades',
+                    'contact.cv': 'CV (PDF)',
+                    'proj.demo': 'Ver Demo',
+                    'proj.code': 'Ver Código',
+                    'a11y.openProjects': 'Abrir proyectos',
+                    'a11y.openAbout': 'Abrir sobre mí',
+                    'a11y.openContact': 'Abrir contacto',
+                    'a11y.email': 'Enviar correo a Aitor Quilez',
+                    'a11y.cv': 'Descargar currículum de Aitor Quilez',
+                    'a11y.linkedin': 'Perfil de LinkedIn',
+                    'a11y.github': 'Perfil de GitHub',
+                    'a11y.photo': 'Foto de Aitor Quilez',
+                    'a11y.close': 'Cerrar',
+                    'a11y.card': 'Ver detalle del proyecto'
+                },
+                en: {
+                    'meta.title': 'Aitor Quilez | Portfolio',
+                    'stack.data': 'Data',
+                    'stack.mobile': 'Mobile',
+                    'stack.agents': 'Autonomous agents',
+                    'about.bio': 'Technology enthusiast transitioning from the chemical industry to software development, combining 15+ years of professional experience with newly acquired technical skills. <strong>Currently completing official training in Multiplatform Application Development (DAM) and self-learning emerging technologies.</strong> Seeking a challenging role in a dynamic tech environment where I can apply my project management, teamwork, and communication expertise, contribute with innovative solutions, and grow as a software professional.',
+                    'contact.open': 'Open to opportunities',
+                    'contact.cv': 'CV (PDF)',
+                    'proj.demo': 'View Demo',
+                    'proj.code': 'View Code',
+                    'a11y.openProjects': 'Open projects',
+                    'a11y.openAbout': 'Open about me',
+                    'a11y.openContact': 'Open contact',
+                    'a11y.email': 'Email Aitor Quilez',
+                    'a11y.cv': 'Download Aitor Quilez resume',
+                    'a11y.linkedin': 'LinkedIn profile',
+                    'a11y.github': 'GitHub profile',
+                    'a11y.photo': 'Photo of Aitor Quilez',
+                    'a11y.close': 'Close',
+                    'a11y.card': 'View project details'
+                }
+            };
+            const STORE = 'portafolio-lang';
+
+            function detect() {
+                try {
+                    const saved = localStorage.getItem(STORE);
+                    if (saved === 'es' || saved === 'en') return saved;
+                } catch (e) { /* modo privado */ }
+                return (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+            }
+
+            function apply(lang) {
+                const d = DICT[lang] || DICT.es;
+                document.documentElement.lang = lang;
+                document.title = d['meta.title'];
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const v = d[el.dataset.i18n];
+                    if (v != null) el.textContent = v;
+                });
+                document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                    const v = d[el.dataset.i18nHtml];
+                    if (v != null) el.innerHTML = v;
+                });
+                document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                    const v = d[el.dataset.i18nAria];
+                    if (v != null) el.setAttribute('aria-label', v);
+                });
+                document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+                    const v = d[el.dataset.i18nAlt];
+                    if (v != null) el.alt = v;
+                });
+
+                // Las descripciones viven en la propia tarjeta, no en el
+                // diccionario, para que anadir un proyecto sea un solo bloque.
+                const tipDesc = document.getElementById('tooltip-desc');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    const txt = lang === 'en' ? card.dataset.descEn : card.dataset.descEs;
+                    const el = card.querySelector('.card-desc');
+                    if (el && txt) el.textContent = txt;
+                    card.setAttribute('aria-label', d['a11y.card'] + ': ' + card.dataset.title);
+                    if (card.classList.contains('active') && tipDesc && txt) tipDesc.textContent = txt;
+                });
+
+                document.querySelectorAll('.lang-btn').forEach(b => {
+                    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+                });
+
+                try { localStorage.setItem(STORE, lang); } catch (e) { /* modo privado */ }
+            }
+
+            document.addEventListener('click', e => {
+                const btn = e.target.closest('.lang-btn');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+                apply(btn.dataset.lang);
+            });
+
+            window.portafolioLang = () => document.documentElement.lang === 'en' ? 'en' : 'es';
+            apply(detect());
+        })();
+    </script>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.157.0/build/three.module.js"}}</script>
     <script type="module">
         try {
-            const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, Vector3, Vector2, Clock, AdditiveBlending, CanvasTexture } = await import('three');
+            const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, LineSegments, LineBasicMaterial, Vector3, Vector2, Clock, AdditiveBlending, CanvasTexture } = await import('three');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
             // Función para crear textura redonda difuminada
             function createCircleTexture() {
@@ -661,9 +1247,68 @@
             });
             const backgroundParticles = new Points(particlesGeometry, particlesMaterial);
             scene.add(backgroundParticles);
+
+            // --- ESTELAS DE WARP ---
+            // Segmentos que solo aparecen mientras la camara viaja: dan la
+            // sensacion de velocidad al saltar entre vistas y en la entrada.
+            const STREAK_COUNT = window.innerWidth <= 768 ? 300 : 700;
+            const streakBase = new Float32Array(STREAK_COUNT * 3);
+            const streakGeometry = new BufferGeometry();
+            streakGeometry.setAttribute('position', new Float32BufferAttribute(new Float32Array(STREAK_COUNT * 6), 3));
+            const streaks = new LineSegments(streakGeometry, new LineBasicMaterial({
+                color: 0xbfd6ff,
+                transparent: true,
+                opacity: 0,
+                blending: AdditiveBlending,
+                depthWrite: false
+            }));
+            streaks.visible = false;
+            scene.add(streaks);
+
+            function seedStreaks() {
+                // Se resiembran alrededor de la camara al empezar cada viaje
+                for (let i = 0; i < STREAK_COUNT; i++) {
+                    streakBase[i * 3]     = camera.position.x + (Math.random() - 0.5) * 70;
+                    streakBase[i * 3 + 1] = camera.position.y + (Math.random() - 0.5) * 70;
+                    streakBase[i * 3 + 2] = camera.position.z + (Math.random() - 0.5) * 90;
+                }
+            }
+
+            const prevCameraPos = new Vector3().copy(camera.position);
+            const travelDelta = new Vector3();
+            let warping = false;
+
+            function updateStreaks() {
+                if (reduceMotion) return;
+                travelDelta.copy(camera.position).sub(prevCameraPos);
+                prevCameraPos.copy(camera.position);
+                const speed = travelDelta.length();
+
+                if (speed > 0.02) {
+                    if (!warping) { warping = true; seedStreaks(); }
+                    travelDelta.divideScalar(speed); // normalizado
+                    const len = Math.min(speed * 16, 10);
+                    const arr = streakGeometry.attributes.position.array;
+                    for (let i = 0; i < STREAK_COUNT; i++) {
+                        const bx = streakBase[i * 3], by = streakBase[i * 3 + 1], bz = streakBase[i * 3 + 2];
+                        arr[i * 6]     = bx;
+                        arr[i * 6 + 1] = by;
+                        arr[i * 6 + 2] = bz;
+                        arr[i * 6 + 3] = bx - travelDelta.x * len;
+                        arr[i * 6 + 4] = by - travelDelta.y * len;
+                        arr[i * 6 + 5] = bz - travelDelta.z * len;
+                    }
+                    streakGeometry.attributes.position.needsUpdate = true;
+                    streaks.visible = true;
+                    streaks.material.opacity = Math.min(0.45, speed * 3.5);
+                } else if (streaks.visible) {
+                    warping = false;
+                    streaks.material.opacity *= 0.86;
+                    if (streaks.material.opacity < 0.02) streaks.visible = false;
+                }
+            }
             
             const starTriggers = document.querySelectorAll('.star-trigger');
-            const btnVolver = document.getElementById('btn-volver');
             const iconParticleSystems = new Map();
             
             // --- NAVEGACIÓN 3D ---
@@ -675,11 +1320,16 @@
             };
             
             let currentView = 'home';
+            // Entrada cinematica: la camara entra desde lejos hasta la orbita
+            const INTRO_FROM_Z = 40, INTRO_MS = 2200;
+            let introStart = null;
+            if (!reduceMotion) camera.position.z = INTRO_FROM_Z;
             const targetCameraPos = new Vector3().copy(views.home.pos);
             const targetCameraLook = new Vector3().copy(views.home.look);
             const currentCameraLook = new Vector3().copy(views.home.look);
             
             function navigateTo(viewName) {
+                introStart = null; // cualquier interaccion corta la intro
                 currentView = viewName;
                 const view = views[viewName];
                 targetCameraPos.copy(view.pos);
@@ -687,9 +1337,13 @@
                 
                 // Hide all panels and active triggers
                 document.querySelectorAll('.content-display').forEach(el => el.classList.remove('active'));
+                starTriggers.forEach(el => el.setAttribute('aria-expanded', 'false'));
+                if (viewName !== 'home') {
+                    const active = document.querySelector(`#${viewName}-dropdown .star-trigger`);
+                    if (active) active.setAttribute('aria-expanded', 'true');
+                }
                 
                 if (viewName === 'home') {
-                    btnVolver.classList.remove('visible');
                     // Show triggers
                     starTriggers.forEach(el => {
                         el.classList.remove('hidden', 'active');
@@ -703,13 +1357,10 @@
                     setTimeout(() => {
                         if (currentView === viewName) {
                             document.getElementById(`${viewName}-content`).classList.add('active');
-                            btnVolver.classList.add('visible');
                         }
                     }, 600);
                 }
             }
-
-            btnVolver.addEventListener('click', () => navigateTo('home'));
 
             starTriggers.forEach(trigger => {
                 const particleCount = 15;
@@ -776,34 +1427,59 @@
 
             const tooltip = document.getElementById('project-tooltip');
             const tooltipImg = document.getElementById('tooltip-img');
+            const tooltipTitle = document.getElementById('tooltip-title');
             const tooltipDesc = document.getElementById('tooltip-desc');
             const tooltipDemo = document.getElementById('tooltip-demo');
             const tooltipRepo = document.getElementById('tooltip-repo');
-            const isMobile = window.innerWidth <= 768;
+            const canHover = window.matchMedia('(hover: hover)').matches;
             
+            function closeTooltip() {
+                tooltip.classList.remove('visible');
+                tooltip.setAttribute('aria-hidden', 'true');
+                document.querySelectorAll('.project-card.active').forEach(c => c.classList.remove('active'));
+            }
+
             function handleProjectClick(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const link = e.target.closest('.project-link');
+                const link = e.target.closest('.project-card');
                 if (!link) return;
+                document.querySelectorAll('.project-card.active').forEach(c => c.classList.remove('active'));
+                link.classList.add('active');
+                tooltipImg.style.display = '';
                 tooltipImg.src = link.dataset.img;
-                tooltipDesc.textContent = link.dataset.description;
+                const lang = window.portafolioLang ? window.portafolioLang() : 'es';
+                tooltipImg.alt = link.dataset.title;
+                tooltipTitle.textContent = link.dataset.title;
+                tooltipDesc.textContent = lang === 'en' ? link.dataset.descEn : link.dataset.descEs;
                 tooltipDemo.href = link.dataset.demo || '#';
                 tooltipRepo.href = link.dataset.repo || '#';
                 tooltipDemo.classList.toggle('hidden', !link.dataset.demo);
+                tooltipRepo.classList.toggle('hidden', !link.dataset.repo);
                 tooltip.classList.add('visible');
                 tooltip.setAttribute('aria-hidden', 'false');
             }
 
             starTriggers.forEach(trigger => {
+                const sectionName = trigger.closest('.dropdown').id.replace('-dropdown', '');
+
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const sectionName = trigger.closest('.dropdown').id.replace('-dropdown', '');
                     navigateTo(sectionName);
                 });
-                
-                if (!isMobile) {
+
+                // Los iconos ya eran enfocables (tabindex) pero no habia forma
+                // de activarlos con teclado: el sitio era inservible sin raton.
+                trigger.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        navigateTo(sectionName);
+                    }
+                });
+
+                if (canHover) {
                     trigger.addEventListener('mouseenter', () => {
                         if (currentView === 'home') {
                             const data = iconParticleSystems.get(trigger);
@@ -828,30 +1504,33 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     if (tooltip.classList.contains('visible')) {
-                        tooltip.classList.remove('visible');
+                        closeTooltip();
                     } else if (currentView !== 'home') {
                         navigateTo('home');
                     }
                 }
             });
 
-            document.querySelectorAll('.project-link').forEach(link => {
+            document.querySelectorAll('.project-card').forEach(link => {
                 link.addEventListener('click', handleProjectClick);
             });
 
+            document.getElementById('tooltip-close').addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeTooltip();
+            });
+
             document.addEventListener('click', (e) => {
-                if (!tooltip.contains(e.target) && !e.target.closest('.project-link')) {
-                    tooltip.classList.remove('visible');
-                    tooltip.setAttribute('aria-hidden', 'true');
+                if (!tooltip.contains(e.target) && !e.target.closest('.project-card')) {
+                    closeTooltip();
                 }
                 
                 // Volver a la órbita al hacer clic fuera del panel
                 if (currentView !== 'home') {
                     const clickedInsidePanel = e.target.closest('.content-display');
                     const clickedTrigger = e.target.closest('.star-trigger');
-                    const clickedVolverBtn = e.target.closest('#btn-volver');
-                    
-                    if (!clickedInsidePanel && !clickedTrigger && !clickedVolverBtn) {
+                    if (!clickedInsidePanel && !clickedTrigger) {
                         navigateTo('home');
                     }
                 }
@@ -870,8 +1549,16 @@
                 backgroundParticles.rotation.y = elapsedTime * 0.05;
                 backgroundParticles.rotation.x = elapsedTime * 0.02;
                 
-                // Suave movimiento de cámara hacia el objetivo (Lerp)
-                camera.position.lerp(targetCameraPos, 0.04);
+                if (introStart !== null) {
+                    // Dolly de entrada con easeOutCubic; al acabar cede el
+                    // control al lerp normal de navegación.
+                    const t = Math.min(1, (performance.now() - introStart) / INTRO_MS);
+                    camera.position.z = INTRO_FROM_Z - (INTRO_FROM_Z - views.home.pos.z) * (1 - Math.pow(1 - t, 3));
+                    if (t >= 1) introStart = null;
+                } else {
+                    // Suave movimiento de cámara hacia el objetivo (Lerp)
+                    camera.position.lerp(targetCameraPos, 0.04);
+                }
                 currentCameraLook.lerp(targetCameraLook, 0.04);
                 
                 // Añadir sutil efecto parallax con el ratón sobre la vista actual
@@ -880,13 +1567,18 @@
                 
                 camera.lookAt(finalLookAt);
                 
+                updateStreaks();
                 updateIconParticles();
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             }
             requestAnimationFrame(() => {
                 document.getElementById('loading-spinner').style.display = 'none';
+                if (!reduceMotion) introStart = performance.now();
+                prevCameraPos.copy(camera.position);
                 animate();
+                // Limpieza: las animaciones ya han terminado por si solas
+                setTimeout(() => document.body.classList.remove('intro'), 3200);
             });
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
