@@ -1,7 +1,11 @@
 (function () {
             const DICT = {
                 es: {
-'project.upcoming': 'Próximamente',
+'project.upcoming': 'Fase Beta · Próximamente',
+'projects.blothor.title': 'Ecosistema Blothor',
+'projects.blothor.desc': 'Productos propios: lo que ya está publicado y lo que llega en fase beta.',
+'projects.personal.title': 'Proyectos personales y de formación',
+'projects.personal.desc': 'Trabajos de clase y proyectos personales: demos y código.',
 "hero.title": "Software que resuelve problemas reales.",
 "hero.desc": "Aplicaciones web, automatización y productos digitales. Del diseño de la interfaz a la lógica que hace que todo funcione.",
 "nav.projects": "Proyectos",
@@ -36,7 +40,11 @@
                     'a11y.card': 'Ver detalle del proyecto'
                 },
                 en: {
-'project.upcoming': 'Coming soon',
+'project.upcoming': 'Beta · Coming soon',
+'projects.blothor.title': 'Blothor ecosystem',
+'projects.blothor.desc': 'My own products: what is already live and what is coming in beta.',
+'projects.personal.title': 'Personal and training projects',
+'projects.personal.desc': 'Coursework and personal projects: demos and code.',
 "hero.title": "Software that solves real problems.",
 "hero.desc": "Web applications, automation and digital products. From interface design to the logic that makes everything work.",
 "nav.projects": "Projects",

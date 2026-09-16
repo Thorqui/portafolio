@@ -19,3 +19,13 @@ Confirmar las tecnologías de cada proyecto, ampliar los destacados con casos de
 `python3 -m http.server 4173 --bind 127.0.0.1`
 
 Los scripts Python antiguos son transformaciones de un solo uso: no ejecutarlos.
+
+## 2026-09-16 — Proyectos separados y vídeos beta
+
+- `#proyectos` dividido en dos bloques: **Ecosistema Blothor** (Blothor, Control
+  de Clases y las tarjetas beta con vídeo: Travel, Blothy, CRM, Safe, Tasks,
+  Blog, Research Intelligence, Private-chat) y **Proyectos personales y de
+  formación** (resto). Etiqueta común «Fase Beta · Próximamente» (i18n).
+- Vídeos en `assets/media/<slug>.mp4` (H.264 1600 px, 24 fps, sin audio,
+  faststart) con portada `<slug>.webp`. Originales en `~/Blothor/videos_nuevos/`.
+- Sin commitear (incluye los cambios previos de Research/Private-chat).

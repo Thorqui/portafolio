@@ -69,6 +69,8 @@
     <div class="dropdown" id="proyectos-dropdown" role="region" data-content="proyectos-content">
         <div class="content-display" id="proyectos-content">
             <section id="proyectos" tabindex="-1"><p class="eyebrow">01 / PORTFOLIO</p><h2 data-i18n="projects.title">Trabajo seleccionado</h2><p class="section-intro" data-i18n="projects.desc">Productos propios y proyectos de aprendizaje. Explora las demos y el código.</p>
+                <div class="project-group" aria-labelledby="group-blothor-title">
+                    <div class="group-head"><h3 id="group-blothor-title" data-i18n="projects.blothor.title">Ecosistema Blothor</h3><p data-i18n="projects.blothor.desc">Productos propios: lo que ya está publicado y lo que llega en fase beta.</p></div>
                 <div class="project-grid">
                     <a href="https://blothor.com" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Blothor.webp" data-title="Blothor" data-desc-es="Central de proyectos digitales: software a medida con interfaces cuidadas al detalle." data-desc-en="Digital product hub: custom software with carefully crafted interfaces." data-demo="https://blothor.com" data-repo="">
                         <span class="card-thumb">
@@ -84,22 +86,6 @@
                             <span class="card-tech"><span class="tech-tag">Vite</span><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS</span><span class="tech-tag">Nginx</span></span>
                         </span>
                     </a>
-                    <article class="project-card project-upcoming" data-title="Research Intelligence" data-status="upcoming" data-desc-es="Informes técnicos bajo demanda sobre productos, empresas y personas. Un proyecto de Blothor pensado para investigar, organizar información y presentar un análisis estructurado adaptado a cada consulta." data-desc-en="On-demand technical reports on products, companies and people. A Blothor project designed to research, organize information and deliver structured analysis tailored to each request.">
-                        <div class="card-body">
-                            <span class="upcoming-label" data-i18n="project.upcoming">Próximamente</span>
-                            <span class="card-title">Research Intelligence</span>
-                            <span class="upcoming-brand">BLOTHOR</span>
-                            <p class="card-desc">Informes técnicos bajo demanda sobre productos, empresas y personas. Un proyecto de Blothor pensado para investigar, organizar información y presentar un análisis estructurado adaptado a cada consulta.</p>
-                        </div>
-                    </article>
-                    <article class="project-card project-upcoming" data-title="Private-chat" data-status="upcoming" data-desc-es="Un asistente personal privado con acceso previsto desde WhatsApp, Telegram y web. Permitirá gestionar tareas y recordatorios mediante texto o audio, transcribir mensajes, buscar en todo el historial y obtener un análisis general de la propia información." data-desc-en="A private personal assistant with planned access through WhatsApp, Telegram and the web. It will support tasks and reminders via text or audio, message transcription, full-history search and an overview of your own information.">
-                        <div class="card-body">
-                            <span class="upcoming-label" data-i18n="project.upcoming">Próximamente</span>
-                            <span class="card-title">Private-chat</span>
-                            <span class="upcoming-brand">BLOTHOR</span>
-                            <p class="card-desc">Un asistente personal privado con acceso previsto desde WhatsApp, Telegram y web. Permitirá gestionar tareas y recordatorios mediante texto o audio, transcribir mensajes, buscar en todo el historial y obtener un análisis general de la propia información.</p>
-                        </div>
-                    </article>
                     <a href="https://dev.blothor.com" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Control_Clases.webp" data-title="Control de Clases" data-desc-es="Reservas automatizadas para academias: saldo de vales y lista de espera que se reparte sola." data-desc-en="Automated bookings for academies: voucher balances and a self-managing waiting list." data-demo="https://dev.blothor.com" data-repo="">
                         <span class="card-thumb">
                             <img src="./Resources/Control_Clases.webp" alt="" loading="lazy" decoding="async">
@@ -114,6 +100,89 @@
                             <span class="card-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span></span>
                         </span>
                     </a>
+                    <article class="project-card project-upcoming" data-title="Travel" data-status="upcoming" data-desc-es="Planificador de viajes: buscador de vuelos con precios reales, «¿A dónde voy?», mapa para explorar sitios, itinerario por días, gastos compartidos y un guía con IA que responde sobre tu viaje." data-desc-en="Trip planner: flight search with real prices, “Where should I go?”, a map to explore places, day-by-day itinerary, shared expenses and an AI guide that answers questions about your trip.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/travel.webp" aria-label="Demostración de Travel"><source src="assets/media/travel.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Travel</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">Planificador de viajes: buscador de vuelos con precios reales, «¿A dónde voy?», mapa para explorar sitios, itinerario por días, gastos compartidos y un guía con IA que responde sobre tu viaje.</p>
+                            <span class="card-tech"><span class="tech-tag">Angular</span><span class="tech-tag">Django</span><span class="tech-tag">PostGIS</span><span class="tech-tag">IA</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Blothy" data-status="upcoming" data-desc-es="El asistente de IA de Blothor: chat con perfiles especializados, historial y respuestas en tiempo real. Da servicio al resto de apps del ecosistema con claves por aplicación." data-desc-en="Blothor’s AI assistant: chat with specialised profiles, history and real-time answers. It powers the rest of the ecosystem through per-application keys.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/blothy.webp" aria-label="Demostración de Blothy"><source src="assets/media/blothy.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Blothy</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">El asistente de IA de Blothor: chat con perfiles especializados, historial y respuestas en tiempo real. Da servicio al resto de apps del ecosistema con claves por aplicación.</p>
+                            <span class="card-tech"><span class="tech-tag">FastAPI</span><span class="tech-tag">React</span><span class="tech-tag">Claude</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="CRM" data-status="upcoming" data-desc-es="CRM multiempresa: panel con indicadores y gráficas, contactos, empresas y pipeline de ventas visual. Cada empresa con su marca y sus datos aislados." data-desc-en="Multi-company CRM: dashboard with KPIs and charts, contacts, companies and a visual sales pipeline. Each company keeps its own branding and isolated data.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/crm.webp" aria-label="Demostración de CRM"><source src="assets/media/crm.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">CRM</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">CRM multiempresa: panel con indicadores y gráficas, contactos, empresas y pipeline de ventas visual. Cada empresa con su marca y sus datos aislados.</p>
+                            <span class="card-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">RLS</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Safe" data-status="upcoming" data-desc-es="Gestor de contraseñas zero-knowledge: la bóveda se cifra en tu navegador (Argon2id + AES-256), con generador de contraseñas, códigos 2FA, auditoría y copias cifradas." data-desc-en="Zero-knowledge password manager: the vault is encrypted in your browser (Argon2id + AES-256), with a password generator, 2FA codes, security audit and encrypted backups.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/safe.webp" aria-label="Demostración de Safe"><source src="assets/media/safe.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Safe</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">Gestor de contraseñas zero-knowledge: la bóveda se cifra en tu navegador (Argon2id + AES-256), con generador de contraseñas, códigos 2FA, auditoría y copias cifradas.</p>
+                            <span class="card-tech"><span class="tech-tag">Angular</span><span class="tech-tag">Django</span><span class="tech-tag">WebCrypto</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Tasks" data-status="upcoming" data-desc-es="Tareas colaborativas por organización: tablero Kanban para el trabajo, fichas de viaje con mapa y presupuesto, y listas de sitios para comer." data-desc-en="Collaborative tasks per organisation: a Kanban board for work, trip sheets with map and budget, and lists of places to eat.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/tasks.webp" aria-label="Demostración de Tasks"><source src="assets/media/tasks.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Tasks</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">Tareas colaborativas por organización: tablero Kanban para el trabajo, fichas de viaje con mapa y presupuesto, y listas de sitios para comer.</p>
+                            <span class="card-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">PostgreSQL</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Blog" data-status="upcoming" data-desc-es="El blog técnico de Blothor: guías reales de DevOps, Linux, herramientas y negocio tech, sin relleno." data-desc-en="Blothor’s technical blog: hands-on guides on DevOps, Linux, tooling and tech business, no filler.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/blog.webp" aria-label="Demostración de Blog"><source src="assets/media/blog.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Blog</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">El blog técnico de Blothor: guías reales de DevOps, Linux, herramientas y negocio tech, sin relleno.</p>
+                            <span class="card-tech"><span class="tech-tag">Astro</span><span class="tech-tag">SEO</span></span>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Research Intelligence" data-status="upcoming" data-desc-es="Informes técnicos bajo demanda sobre productos, empresas y personas. Un proyecto de Blothor pensado para investigar, organizar información y presentar un análisis estructurado adaptado a cada consulta." data-desc-en="On-demand technical reports on products, companies and people. A Blothor project designed to research, organize information and deliver structured analysis tailored to each request.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/research-intelligence.webp" aria-label="Demostración de Research Intelligence"><source src="assets/media/research-intelligence.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Research Intelligence</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">Informes técnicos bajo demanda sobre productos, empresas y personas. Un proyecto de Blothor pensado para investigar, organizar información y presentar un análisis estructurado adaptado a cada consulta.</p>
+                        </div>
+                    </article>
+                    <article class="project-card project-upcoming" data-title="Private-chat" data-status="upcoming" data-desc-es="Un asistente personal privado con acceso previsto desde WhatsApp, Telegram y web. Permitirá gestionar tareas y recordatorios mediante texto o audio, transcribir mensajes, buscar en todo el historial y obtener un análisis general de la propia información." data-desc-en="A private personal assistant with planned access through WhatsApp, Telegram and the web. It will support tasks and reminders via text or audio, message transcription, full-history search and an overview of your own information.">
+                        <video class="upcoming-video" controls playsinline preload="none" poster="assets/media/private-chat.webp" aria-label="Demostración de Private-chat"><source src="assets/media/private-chat.mp4" type="video/mp4">Tu navegador no admite la reproducción de vídeo.</video>
+                        <div class="card-body">
+                            <span class="upcoming-label" data-i18n="project.upcoming">Fase Beta · Próximamente</span>
+                            <span class="card-title">Private-chat</span>
+                            <span class="upcoming-brand">BLOTHOR</span>
+                            <p class="card-desc">Un asistente personal privado con acceso previsto desde WhatsApp, Telegram y web. Permitirá gestionar tareas y recordatorios mediante texto o audio, transcribir mensajes, buscar en todo el historial y obtener un análisis general de la propia información.</p>
+                        </div>
+                    </article>
+                </div>
+                </div>
+                <div class="project-group" aria-labelledby="group-personal-title">
+                    <div class="group-head"><h3 id="group-personal-title" data-i18n="projects.personal.title">Proyectos personales y de formación</h3><p data-i18n="projects.personal.desc">Trabajos de clase y proyectos personales: demos y código.</p></div>
+                <div class="project-grid">
                     <a href="https://arete-dance-studio-x65l.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card" data-img="./Resources/Arete.webp" data-title="Arete Dance" data-desc-es="Una web moderna para una academia de baile." data-desc-en="A modern website for a dance academy." data-demo="https://arete-dance-studio-x65l.vercel.app/" data-repo="https://github.com/Thorqui/AreteDance">
                         <span class="card-thumb">
                             <img src="./Resources/Arete.webp" alt="" loading="lazy" decoding="async">
@@ -240,6 +309,7 @@
                             <span class="card-tech"><span class="tech-tag">Python</span><span class="tech-tag">Automation</span><span class="tech-tag">EXE</span></span>
                         </span>
                     </a>
+                </div>
                 </div>
             </section>
         </div>
