@@ -129,5 +129,6 @@
             });
 
             window.portafolioLang = () => document.documentElement.lang === 'en' ? 'en' : 'es';
-            apply(detect());
+            // Selector temporalmente retirado: mostrar siempre español.
+            apply('es');
         })();
