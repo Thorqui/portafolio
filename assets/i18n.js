@@ -1,6 +1,7 @@
 (function () {
             const DICT = {
                 es: {
+'project.upcoming': 'Próximamente',
 "hero.title": "Software que resuelve problemas reales.",
 "hero.desc": "Aplicaciones web, automatización y productos digitales. Del diseño de la interfaz a la lógica que hace que todo funcione.",
 "nav.projects": "Proyectos",
@@ -35,6 +36,7 @@
                     'a11y.card': 'Ver detalle del proyecto'
                 },
                 en: {
+'project.upcoming': 'Coming soon',
 "hero.title": "Software that solves real problems.",
 "hero.desc": "Web applications, automation and digital products. From interface design to the logic that makes everything work.",
 "nav.projects": "Projects",
@@ -109,7 +111,7 @@
                     const txt = lang === 'en' ? card.dataset.descEn : card.dataset.descEs;
                     const el = card.querySelector('.card-desc');
                     if (el && txt) el.textContent = txt;
-                    card.setAttribute('aria-label', d['project.visit'] + ': ' + card.dataset.title);
+                    card.setAttribute('aria-label', (card.dataset.status === 'upcoming' ? d['project.upcoming'] : d['project.visit']) + ': ' + card.dataset.title);
                     if (card.classList.contains('active') && tipDesc && txt) tipDesc.textContent = txt;
                 });
 

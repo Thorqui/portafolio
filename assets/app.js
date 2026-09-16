@@ -2,7 +2,7 @@
     const dialog = document.getElementById('project-tooltip');
     const close = document.getElementById('tooltip-close');
     let origin;
-    document.querySelectorAll('.project-card').forEach(card => {
+    document.querySelectorAll('.project-card:not([data-status="upcoming"])').forEach(card => {
         const item = document.createElement('div');
         item.className = 'project-item';
         card.before(item);

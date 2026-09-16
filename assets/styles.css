@@ -845,3 +845,12 @@ body { overflow: visible; }
  .card-body { padding: 16px; gap: 10px; }
  .content-display #info { display: block; text-align: left; }
 }
+
+/* Future Blothor projects have descriptions but no navigation affordance. */
+.project-upcoming { padding: 20px; border-style: dashed; }
+.project-upcoming .card-body { padding: 0; gap: 14px; }
+.project-upcoming .card-desc { display: block; overflow: visible; -webkit-line-clamp: unset; font-size: 15px; line-height: 1.75; margin: 0; }
+.project-upcoming .card-title { font-size: 20px; }
+.upcoming-label { color: #b4ebd9; font-size: 13px; }
+.upcoming-brand { color: #9baac0; font-size: 12px; letter-spacing: .15em; }
+.project-upcoming:hover { transform: none; cursor: default; }
